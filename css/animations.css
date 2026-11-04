@@ -1,0 +1,115 @@
+/* ============================================================
+   VIVO FRESH — MOTION
+   ============================================================ */
+
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+html.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger cards inside a grid */
+html.js .pgrid .reveal:nth-child(1) {
+  transition-delay: 0.02s;
+}
+html.js .pgrid .reveal:nth-child(2) {
+  transition-delay: 0.06s;
+}
+html.js .pgrid .reveal:nth-child(3) {
+  transition-delay: 0.1s;
+}
+html.js .pgrid .reveal:nth-child(4) {
+  transition-delay: 0.14s;
+}
+html.js .pgrid .reveal:nth-child(5) {
+  transition-delay: 0.18s;
+}
+html.js .pgrid .reveal:nth-child(6) {
+  transition-delay: 0.22s;
+}
+
+@keyframes vivoFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.hero__copy > * {
+  animation: vivoFadeUp 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.hero__copy > *:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.hero__copy > *:nth-child(2) {
+  animation-delay: 0.13s;
+}
+.hero__copy > *:nth-child(3) {
+  animation-delay: 0.21s;
+}
+.hero__copy > *:nth-child(4) {
+  animation-delay: 0.29s;
+}
+.hero__copy > *:nth-child(5) {
+  animation-delay: 0.37s;
+}
+
+.hero__art > * {
+  animation: vivoFadeUp 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+.hero__arch {
+  animation-delay: 0.18s;
+}
+.hero__chip--a {
+  animation-delay: 0.32s;
+}
+.hero__chip--b {
+  animation-delay: 0.4s;
+}
+.hero__badge {
+  animation-delay: 0.48s;
+}
+
+@keyframes vivoPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.14);
+  }
+}
+.cart-link__count.is-bump {
+  animation: vivoPulse 0.45s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero__copy > *,
+  .hero__art > * {
+    animation: none !important;
+  }
+  .cart-link__count.is-bump {
+    animation: none !important;
+  }
+  .btn:hover,
+  .pcard:hover,
+  .cattile:hover,
+  .social-btn:hover {
+    transform: none !important;
+  }
+}

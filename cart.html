@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your Order — VIVO FRESH @ UGANDA</title>
+    <meta name="description"
+        content="Review your fruit order from VIVO FRESH @ UGANDA, add your delivery details and send the order to us on WhatsApp.">
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#285943">
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23285943'/%3E%3Cpath d='M32 48c0-13 9-22 22-22 0 13-9 22-22 22z' fill='%23F1A34A'/%3E%3Cpath d='M32 48c0-9.5-6.5-16-16-16 0 9.5 6.5 16 16 16z' fill='%23E76D58'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <script>document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" id="siteHeader">
+        <div class="wrap header__inner">
+            <a class="brand" href="index.html" aria-label="VIVO FRESH @ UGANDA — Home">
+                <span class="brand__mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <path d="M16 27c0-7.5 5-12.5 12.5-12.5C28.5 22 23.5 27 16 27Z" fill="#F1A34A" />
+                        <path d="M16 27c0-6-4-10-10-10 0 6 4 10 10 10Z" fill="#E76D58" />
+                        <path d="M16 27V9" stroke="#FFF5E8" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                </span>
+                <span class="brand__text">
+                    <span class="brand__name">VIVO <em>FRESH</em></span>
+                    <span class="brand__sub">@ Uganda</span>
+                </span>
+            </a>
+
+            <nav class="nav" id="primaryNav" aria-label="Primary navigation">
+                <ul class="nav__list">
+                    <li><a class="nav__link" href="index.html">Home</a></li>
+                    <li><a class="nav__link" href="about.html">About Us</a></li>
+                    <li><a class="nav__link" href="products.html">Our Products</a></li>
+                    <li><a class="nav__link" href="delivery.html">Delivery</a></li>
+                    <li><a class="nav__link" href="contact.html">Contact</a></li>
+                </ul>
+                <a class="btn btn--coral nav__cta" href="products.html">Shop Now</a>
+            </nav>
+
+            <div class="header__actions">
+                <a class="cart-link" href="cart.html" aria-label="View your order" aria-current="page">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 4h2l2.4 11.2a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.55L21 8H6" stroke="currentColor"
+                            stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" />
+                        <circle cx="10" cy="20" r="1.4" fill="currentColor" />
+                        <circle cx="17.5" cy="20" r="1.4" fill="currentColor" />
+                    </svg>
+                    <span class="cart-link__count js-cart-count" data-count="0">0</span>
+                </a>
+                <a class="btn btn--primary btn--sm header__shop" href="products.html">Shop Now</a>
+                <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
+                    aria-label="Open menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <section class="page-hero">
+            <div class="hero__glow" aria-hidden="true"></div>
+            <div class="wrap page-hero__inner">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <a href="index.html">Home</a> <span aria-hidden="true">/</span>
+                    <a href="products.html">Our Products</a> <span aria-hidden="true">/</span>
+                    <span aria-current="page">Your Order</span>
+                </nav>
+                <p class="eyebrow">Your order</p>
+                <h1 class="h1">Review, add your details, send on WhatsApp.</h1>
+                <p class="lede">Nothing is charged on this website. Once you send the message in WhatsApp, our team
+                    confirms availability, any range prices, delivery fees and timing with you directly.</p>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0;">
+            <div class="wrap">
+                <div id="cartEmpty" class="empty-state" hidden>
+                    <h3>Your order is empty</h3>
+                    <p>Browse the catalogue and add the fruits you would like.</p>
+                    <a class="btn btn--primary" href="products.html">Browse the fruits</a>
+                </div>
+
+                <form class="cart-layout" id="orderForm" novalidate>
+                    <div class="cart-main">
+                        <div id="cartItems"></div>
+
+                        <section class="summary__card" style="margin-top:1rem;">
+                            <h2 class="summary__title">Your details</h2>
+                            <div class="form">
+                                <div class="form__grid">
+                                    <div class="field">
+                                        <label for="fullName">Full name <span class="req"
+                                                aria-hidden="true">*</span></label>
+                                        <input id="fullName" name="fullName" type="text" autocomplete="name" required
+                                            placeholder="e.g. John Doe">
+                                        <p class="field__error" data-error-for="fullName" aria-live="polite"></p>
+                                    </div>
+                                    <div class="field">
+                                        <label for="phone">WhatsApp / contact number <span class="req"
+                                                aria-hidden="true">*</span></label>
+                                        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
+                                            required placeholder="e.g. 07XX XXX XXX">
+                                        <p class="field__error" data-error-for="phone" aria-live="polite"></p>
+                                    </div>
+                                    <div class="field field--full">
+                                        <label for="location">Delivery location <span class="req"
+                                                aria-hidden="true">*</span></label>
+                                        <input id="location" name="location" type="text" autocomplete="address-level2"
+                                            required placeholder="e.g. Ntinda, Kampala / Gulu / Mbarara">
+                                        <p class="field__error" data-error-for="location" aria-live="polite"></p>
+                                    </div>
+                                    <div class="field field--full">
+                                        <label for="notes">Additional instructions <span
+                                                class="field__hint">(optional)</span></label>
+                                        <textarea id="notes" name="notes"
+                                            placeholder="Ripeness preferences, preferred delivery time, landmarks, etc."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <aside class="cart-summary" id="cartSummary"></aside>
+                </form>
+
+                <div class="form-status" id="orderStatus" hidden style="margin-top:1.5rem;"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap footer__inner">
+            <div class="footer__about">
+                <a class="brand brand--footer" href="index.html" aria-label="VIVO FRESH @ UGANDA — Home">
+                    <span class="brand__mark" aria-hidden="true">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M16 27c0-7.5 5-12.5 12.5-12.5C28.5 22 23.5 27 16 27Z" fill="#F1A34A" />
+                            <path d="M16 27c0-6-4-10-10-10 0 6 4 10 10 10Z" fill="#E76D58" />
+                            <path d="M16 27V9" stroke="#FFF5E8" stroke-width="1.6" stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <span class="brand__text">
+                        <span class="brand__name">VIVO <em>FRESH</em></span>
+                        <span class="brand__sub">@ Uganda</span>
+                    </span>
+                </a>
+                <p>Fresh fruit from Nakasero Market, Kampala — delivered across Uganda. Order easily on WhatsApp.</p>
+                <div class="footer__social" data-social-list aria-label="Social media"></div>
+            </div>
+
+            <nav class="footer__col" aria-label="Footer navigation">
+                <h3>Explore</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="products.html">Our Products</a></li>
+                    <li><a href="cart.html">Your Order</a></li>
+                    <li><a href="delivery.html">Delivery Information</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+
+            <div class="footer__col">
+                <h3>Get in touch</h3>
+                <ul>
+                    <li><a href="https://wa.me/256788733850" target="_blank" rel="noopener">WhatsApp · +256 788 733
+                            850</a></li>
+                    <li><a href="https://wa.me/256755554669" target="_blank" rel="noopener">WhatsApp Business · +256 755
+                            554 669</a></li>
+                    <li><a href="mailto:amongivivian123@gmail.com">amongivivian123@gmail.com</a></li>
+                    <li>Nakasero Market, Kampala, Uganda</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="wrap footer__base">
+            <p>© <span class="js-year">2025</span> VIVO FRESH @ UGANDA. All rights reserved.</p>
+            <p class="footer__note">Prices are shown in Ugandan Shillings and are confirmed on WhatsApp before an order
+                is finalised.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/data/fruits.js"></script>
+    <script src="js/data/vegetables.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/whatsapp.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/order-form.js"></script>
+</body>
+
+</html>
