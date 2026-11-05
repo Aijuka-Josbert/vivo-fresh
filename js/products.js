@@ -1,6 +1,7 @@
 /* ============================================================
    PRODUCT CATALOGUE — rendering, search, filtering, add-to-order
-   Also renders the homepage "featured" strip.
+   Scope-aware: fruits.html uses 'fruits', vegetables.html uses 'veg'.
+   Homepage featured strip runs on any page.
    ============================================================ */
 (function () {
     'use strict';
@@ -29,7 +30,7 @@
             'loading="lazy" decoding="async" ' +
             'onerror="this.parentNode.classList.add(\'is-fallback\');this.remove();">' +
             '<span class="media-fallback">' + esc(product.name) + '</span>' +
-            '<span class="pcard__tag">' + esc(product.category.replace(' Fruits', '')) + '</span>' +
+            '<span class="pcard__tag">' + esc(product.category) + '</span>' +
             '</div>' +
             '<div class="pcard__body">' +
             '<h3 class="pcard__name">' + esc(product.name) + '</h3>' +
@@ -80,7 +81,9 @@
     /* ---------- Homepage category tiles ---------- */
     const categoryGrid = document.getElementById('categoryGrid');
     if (categoryGrid) {
-        categoryGrid.innerHTML = VIVO.CATEGORIES.map(function (cat) {
+        /* Homepage shows fruit categories only — veg has its own page */
+        const FRUIT_CATS = ['Tropical Fruits', 'Berries', 'Citrus Fruits', 'Exotic Fruits', 'Everyday Fruits', 'Seasonal Fruits'];
+        categoryGrid.innerHTML = FRUIT_CATS.map(function (cat) {
             const n = VIVO.products.filter(function (p) { return p.category === cat; }).length;
             if (!n) return '';
             return '' +
@@ -97,6 +100,24 @@
     const grid = document.getElementById('productGrid');
     if (!grid) return;
 
+    /* The host page declares its scope on <body data-scope="fruits|veg">.
+       Fallback: infer from the presence of the category chips on the page. */
+    const SCOPE = document.body.dataset.scope || 'all';
+
+    const SCOPE_POOL = (function () {
+        const fruits = Array.isArray(window.VIVO_FRUITS) ? window.VIVO_FRUITS : [];
+        const veg    = Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : [];
+        if (SCOPE === 'fruits') return fruits;
+        if (SCOPE === 'veg')    return veg;
+        return fruits.concat(veg);
+    })();
+
+    const SCOPE_CATEGORIES = (function () {
+        const all = VIVO.CATEGORIES;
+        const present = new Set(SCOPE_POOL.map(function (p) { return p.category; }));
+        return all.filter(function (c) { return present.has(c); });
+    })();
+
     const searchInput = document.getElementById('productSearch');
     const clearBtn = document.getElementById('clearSearch');
     const chipsHost = document.getElementById('categoryChips');
@@ -107,18 +128,14 @@
     let activeCategory = params.get('category') || 'All';
     let query = '';
 
-    if (!['All'].concat(VIVO.CATEGORIES).includes(activeCategory)) activeCategory = 'All';
+    if (!['All'].concat(SCOPE_CATEGORIES).includes(activeCategory)) activeCategory = 'All';
 
-    /* Build chips */
     function buildChips() {
-        const cats = ['All'].concat(VIVO.CATEGORIES.filter(function (c) {
-            return VIVO.products.some(function (p) { return p.category === c; });
-        }));
-
+        const cats = ['All'].concat(SCOPE_CATEGORIES);
         chipsHost.innerHTML = cats.map(function (cat) {
             const n = cat === 'All'
-                ? VIVO.products.length
-                : VIVO.products.filter(function (p) { return p.category === cat; }).length;
+                ? SCOPE_POOL.length
+                : SCOPE_POOL.filter(function (p) { return p.category === cat; }).length;
             return '<button type="button" class="chip" data-cat="' + esc(cat) + '" ' +
                 'aria-pressed="' + (cat === activeCategory) + '">' +
                 esc(cat) + ' <span class="chip__n">' + n + '</span></button>';
@@ -134,22 +151,18 @@
     }
 
     function render() {
-        const results = VIVO.products.filter(matches);
-
+        const results = SCOPE_POOL.filter(matches);
         grid.innerHTML = results.map(VIVO.renderProductCard).join('');
-
-        // Product cards are inserted after main.js starts its observer.
-        grid.querySelectorAll('.reveal').forEach(function (card) {
-            card.classList.add('is-in');
-        });
+        grid.querySelectorAll('.reveal').forEach(function (card) { card.classList.add('is-in'); });
 
         grid.hidden = results.length === 0;
         if (emptyState) emptyState.hidden = results.length !== 0;
 
         if (countEl) {
+            const noun = SCOPE === 'fruits' ? 'fruits' : (SCOPE === 'veg' ? 'products' : 'products');
             countEl.textContent = results.length === 0
-                ? 'No fruits match your search'
-                : 'Showing ' + results.length + ' of ' + VIVO.products.length + ' products';
+                ? 'No ' + noun + ' match your search'
+                : 'Showing ' + results.length + ' of ' + SCOPE_POOL.length + ' ' + noun;
         }
 
         chipsHost.querySelectorAll('.chip').forEach(function (c) {

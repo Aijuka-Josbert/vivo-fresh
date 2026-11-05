@@ -19,9 +19,31 @@
     };
 
     VIVO.CATEGORIES = [
+        /* Fruits */
         'Tropical Fruits', 'Berries', 'Citrus Fruits',
-        'Exotic Fruits', 'Everyday Fruits', 'Seasonal Fruits'
+        'Exotic Fruits', 'Everyday Fruits', 'Seasonal Fruits',
+        /* Vegetables / Spices / Meat */
+        'Leafy Greens', 'Roots & Tubers', 'Peppers & Chillies',
+        'Tomatoes & Onions', 'Beans & Peas', 'Gourds & Squashes',
+        'Mushrooms', 'Herbs & Aromatics', 'Vegetables',
+        'Spices', 'Meat'
     ];
+
+    const TONES = {
+        /* Fruits */
+        'Tropical Fruits': 'tropical', 'Berries': 'berries',
+        'Citrus Fruits': 'citrus', 'Exotic Fruits': 'exotic',
+        'Everyday Fruits': 'everyday', 'Seasonal Fruits': 'seasonal',
+        /* Vegetables / Spices / Meat */
+        'Leafy Greens': 'leafy', 'Roots & Tubers': 'root',
+        'Peppers & Chillies': 'chilli', 'Tomatoes & Onions': 'tomato',
+        'Beans & Peas': 'beans', 'Gourds & Squashes': 'gourd',
+        'Mushrooms': 'mushroom', 'Herbs & Aromatics': 'herb',
+        'Vegetables': 'veg',
+        'Spices': 'spice', 'Meat': 'meat'
+    };
+
+    VIVO.toneFor = function (category) { return TONES[category] || 'exotic'; };
 
     /* ---------- Formatting ---------- */
     const nf = new Intl.NumberFormat('en-UG', { maximumFractionDigits: 0 });
@@ -44,14 +66,6 @@
     VIVO.unitLabel = function (p) {
         return UNIT_LABELS[p.unit] || ('per ' + (p.unit || 'unit'));
     };
-
-    const TONES = {
-        'Tropical Fruits': 'tropical', 'Berries': 'berries',
-        'Citrus Fruits': 'citrus', 'Exotic Fruits': 'exotic',
-        'Everyday Fruits': 'everyday', 'Seasonal Fruits': 'seasonal',
-        'Vegetables': 'everyday'
-    };
-    VIVO.toneFor = function (category) { return TONES[category] || 'exotic'; };
 
     /* ---------- Image fallback (also used inline in HTML) ---------- */
     VIVO.imgFallback = function (img) {

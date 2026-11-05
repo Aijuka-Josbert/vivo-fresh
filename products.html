@@ -4,29 +4,36 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Our Products — 43 Fresh Fruits | VIVO FRESH @ UGANDA</title>
+    <title>Fresh Fruits — 43 Varieties | VIVO FRESH @ UGANDA</title>
     <meta name="description"
         content="Browse all 43 fresh fruit products from VIVO FRESH @ UGANDA — tropical fruits, berries, citrus, exotic and everyday fruits. Prices in UGX. Order on WhatsApp.">
     <link rel="canonical" href="https://vivofreshuganda.com/products.html">
     <meta name="theme-color" content="#285943">
+
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Our Products — VIVO FRESH @ UGANDA">
+    <meta property="og:site_name" content="VIVO FRESH @ UGANDA">
+    <meta property="og:title" content="Fresh Fruits — VIVO FRESH @ UGANDA">
     <meta property="og:description"
         content="43 fresh fruit varieties from Nakasero Market, Kampala. Search, filter and order on WhatsApp.">
+    <meta property="og:url" content="https://vivofreshuganda.com/products.html">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon"
         href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23285943'/%3E%3Cpath d='M32 48c0-13 9-22 22-22 0 13-9 22-22 22z' fill='%23F1A34A'/%3E%3Cpath d='M32 48c0-9.5-6.5-16-16-16 0 9.5 6.5 16 16 16z' fill='%23E76D58'/%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/animations.css">
     <script>document.documentElement.classList.remove('no-js'); document.documentElement.classList.add('js');</script>
 </head>
 
-<body>
+<body data-scope="fruits">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" id="siteHeader">
@@ -81,13 +88,34 @@
             <div class="hero__glow" aria-hidden="true"></div>
             <div class="wrap page-hero__inner">
                 <nav class="breadcrumb" aria-label="Breadcrumb">
-                    <a href="index.html">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Our
-                        Products</span>
+                    <a href="index.html">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Fresh
+                        Fruits</span>
                 </nav>
-                <p class="eyebrow">The catalogue</p>
-                <h1 class="h1">Every fruit we currently carry.</h1>
-                <p class="lede">Search the full range or filter by category. Add what you want to your order, then send
-                    it to us on WhatsApp — we will confirm availability, any range prices, and delivery with you.</p>
+                <p class="eyebrow">Fruit catalogue · 43 varieties</p>
+                <h1 class="h1">Fresh fruit, from the market.</h1>
+                <p class="lede">Search the full fruit range or filter by category. Add what you want to your order, then
+                    send it to us on WhatsApp — we will confirm availability, any range prices, and delivery with you.
+                </p>
+            </div>
+        </section>
+
+        <!-- ====== CROSS-LINK TO VEGETABLES ====== -->
+        <section class="section section--tight" style="padding-top:0;">
+            <div class="wrap">
+                <a class="sector-switch" href="vegetables.html">
+                    <span class="sector-switch__icon" aria-hidden="true">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M16 28c6-4 10-9 10-15a10 10 0 0 0-20 0c0 6 4 11 10 15z" fill="#285943" />
+                            <path d="M16 28V13M16 17l-4-3M16 20l4-3" stroke="#FFF5E8" stroke-width="1.6"
+                                stroke-linecap="round" />
+                        </svg>
+                    </span>
+                    <span class="sector-switch__text">
+                        <span class="sector-switch__eyebrow">Also shopping for</span>
+                        <span class="sector-switch__title">Vegetables, spices &amp; meat →</span>
+                        <span class="sector-switch__sub">90 more products at the market</span>
+                    </span>
+                </a>
             </div>
         </section>
 
@@ -100,11 +128,11 @@
                             <path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
                         </svg>
                         <input type="search" id="productSearch" placeholder="Search fruits — mangoes, berries, citrus…"
-                            aria-label="Search products" autocomplete="off">
+                            aria-label="Search fruits" autocomplete="off">
                         <button type="button" class="toolbar__clear" id="clearSearch" hidden
                             aria-label="Clear search">&times;</button>
                     </div>
-                    <div class="chips" id="categoryChips" role="group" aria-label="Filter by category"></div>
+                    <div class="chips" id="categoryChips" role="group" aria-label="Filter fruits by category"></div>
                     <p class="toolbar__count" id="resultCount" aria-live="polite"></p>
                 </div>
 
@@ -112,10 +140,10 @@
 
                 <div class="empty-state" id="emptyState" hidden>
                     <h3>No fruits match that search</h3>
-                    <p>Try a different word, or clear the filters to see all 43 products.</p>
+                    <p>Try a different word, or clear the filters to see all 43 fruits.</p>
                     <button type="button" class="btn btn--ghost"
                         onclick="document.getElementById('clearSearch').click();document.querySelector('.chip[data-cat=\'All\']').click();">Show
-                        all products</button>
+                        all fruits</button>
                 </div>
             </div>
         </section>
@@ -126,13 +154,12 @@
                     <div>
                         <p class="eyebrow">About our prices</p>
                         <h2 class="h2">Some fruits are priced on confirmation.</h2>
-                        <p class="lede" style="margin-top:1rem;">A few items — Local Lemon, Small Bananas, Peaches,
-                            Plums and Pawpaw — are listed as a price range because the final amount depends on size and
-                            quantity. These are never given a made-up subtotal on this website.</p>
+                        <p class="lede" style="margin-top:1rem;">Local Lemon, Small Bananas, Peaches, Plums and Pawpaw
+                            are listed as a price range because the final amount depends on size and quantity. These
+                            are never given a made-up subtotal on this website.</p>
                     </div>
                     <ul class="delivery-panel__list">
-                        <li>Range-priced items are added to your order with a clear "final price confirmed on WhatsApp"
-                            note.</li>
+                        <li>Range-priced items show a clear "final price confirmed on WhatsApp" note.</li>
                         <li>Your order summary only totals fixed-price items.</li>
                         <li>Our team confirms the final amount for range-priced items before the order is completed.
                         </li>
@@ -144,11 +171,12 @@
         <section class="section section--tight">
             <div class="wrap">
                 <div class="cta-banner reveal">
-                    <h2 class="h2">Vegetables are coming next.</h2>
-                    <p>We are preparing a vegetable catalogue to sit alongside our fruits. Once it is ready, it will
-                        appear on this page automatically.</p>
+                    <h2 class="h2">Add vegetables, spices or meat too?</h2>
+                    <p>Everything can go into one WhatsApp order. Visit the other catalogue to complete your shop.</p>
                     <div class="cta-banner__actions">
-                        <a class="btn btn--light" href="contact.html">Ask us about vegetables</a>
+                        <a class="btn btn--light" href="vegetables.html">Vegetables, spices &amp; meat</a>
+                        <a class="btn btn--ghost" href="cart.html"
+                            style="border-color:rgba(255,255,255,.6);color:#fff;">Review your order</a>
                     </div>
                 </div>
             </div>
@@ -172,20 +200,22 @@
                         <span class="brand__sub">@ Uganda</span>
                     </span>
                 </a>
-                <p>Fresh fruit from Nakasero Market, Kampala — delivered across Uganda. Order easily on WhatsApp.</p>
+                <p>Fresh fruit, vegetables, spices and meat from Nakasero Market, Kampala — delivered across Uganda.
+                    Order easily on WhatsApp.</p>
                 <div class="footer__social" data-social-list aria-label="Social media"></div>
             </div>
 
             <nav class="footer__col" aria-label="Footer navigation">
                 <h3>Explore</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="products.html">Our Products</a></li>
-                    <li><a href="cart.html">Your Order</a></li>
-                    <li><a href="delivery.html">Delivery Information</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
+               <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About Us</a></li>
+    <li><a href="products.html">Fresh Fruits</a></li>
+    <li><a href="vegetables.html">Vegetables &amp; More</a></li>
+    <li><a href="cart.html">Your Order</a></li>
+    <li><a href="delivery.html">Delivery Information</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+</ul>
             </nav>
 
             <div class="footer__col">
@@ -193,7 +223,6 @@
                 <ul>
                     <li><a href="https://wa.me/256788733850" target="_blank" rel="noopener">WhatsApp · +256 788 733
                             850</a></li>
-                    
                     <li><a href="mailto:amongivivian123@gmail.com">amongivivian123@gmail.com</a></li>
                     <li>Nakasero Market, Kampala, Uganda</li>
                 </ul>
