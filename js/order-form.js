@@ -113,8 +113,8 @@
             '<p>Your order has <em>not</em> been received yet. Press <strong>Send</strong> in WhatsApp to deliver the message to VIVO FRESH. ' +
             'We will then confirm product availability, final prices for range-priced fruits, delivery fees and timing with you.</p>' +
             '<p class="form-status__small">If WhatsApp did not open, use <strong>Copy order message</strong> and send it to ' +
-            '<a href="https://wa.me/' + VIVO.config.whatsapp.orderNumber + '" target="_blank" rel="noopener">' +
-            VIVO.config.whatsapp.business.display + '</a>.</p>'
+            '<a href="https://wa.me/' + VIVO.config.whatsapp.number.intl + '" target="_blank" rel="noopener">' +
+            VIVO.config.whatsapp.number.display + '</a>.'
         );
     });
 

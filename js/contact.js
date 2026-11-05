@@ -90,8 +90,8 @@
       showStatus('error',
         '<strong>The email form is not connected yet.</strong>' +
         '<p>Please reach us directly at <a href="mailto:' + CFG.recipient + '">' + CFG.recipient + '</a> ' +
-        'or message us on WhatsApp at <a href="https://wa.me/' + VIVO.config.whatsapp.business.intl + '" target="_blank" rel="noopener">' +
-        VIVO.config.whatsapp.business.display + '</a>.</p>'
+        'or message us on WhatsApp at <a href="https://wa.me/' + VIVO.config.whatsapp.number.intl + '" target="_blank" rel="noopener">' +
+        VIVO.config.whatsapp.number.display + '</a>.</p>'
       );
       return;
     }
@@ -135,7 +135,7 @@
         showStatus('error',
           '<strong>Sorry, your message could not be sent.</strong>' +
           '<p>Please try again, or contact us directly at <a href="mailto:' + CFG.recipient + '">' + CFG.recipient + '</a> ' +
-          'or on <a href="https://wa.me/' + VIVO.config.whatsapp.business.intl + '" target="_blank" rel="noopener">WhatsApp</a>.</p>'
+          'or on <a href="https://wa.me/' + VIVO.config.whatsapp.number.intl + '" target="_blank" rel="noopener">WhatsApp</a>.</p>'
         );
       })
       .finally(function () {

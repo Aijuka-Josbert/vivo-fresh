@@ -135,7 +135,14 @@
 
     function render() {
         const results = VIVO.products.filter(matches);
+
         grid.innerHTML = results.map(VIVO.renderProductCard).join('');
+
+        // Product cards are inserted after main.js starts its observer.
+        grid.querySelectorAll('.reveal').forEach(function (card) {
+            card.classList.add('is-in');
+        });
+
         grid.hidden = results.length === 0;
         if (emptyState) emptyState.hidden = results.length !== 0;
 

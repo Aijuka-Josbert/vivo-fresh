@@ -11,7 +11,7 @@
     const CFG = VIVO.config;
 
     function link(message) {
-        return 'https://wa.me/' + CFG.whatsapp.orderNumber +
+        return 'https://wa.me/' + CFG.whatsapp.number.intl +
             '?text=' + encodeURIComponent(message);
     }
 

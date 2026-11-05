@@ -131,7 +131,7 @@
 
     /* ---------- WhatsApp generic links ---------- */
     document.querySelectorAll('[data-wa="general"]').forEach(function (el) {
-        const num = CFG.whatsapp.orderNumber;
+        const num = CFG.whatsapp.number.intl;
         const msg = 'Hello ' + CFG.brand.name + '!\n\n' +
             "I'd like to find out more about your fresh fruits and delivery across Uganda.";
         el.setAttribute('href', 'https://wa.me/' + num + '?text=' + encodeURIComponent(msg));
