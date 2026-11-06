@@ -116,7 +116,12 @@
       emit();
     },
 
-    clear: function () { write([]); emit(); },
+    clear: function () { 
+      write([]); 
+      emit(); 
+      // Clear the "drafted" flag when the cart is completely emptied
+      sessionStorage.removeItem('vivo_wa_drafted');
+    },
 
     onChange: function (fn) { listeners.push(fn); },
     refreshBadges: updateBadges
@@ -247,6 +252,20 @@
         '<p class="summary__safe">Opening WhatsApp does <strong>not</strong> place your order — you must press <strong>Send</strong> in WhatsApp. We will then confirm availability, final prices and delivery.</p>' +
         '<button type="button" class="btn btn--ghost btn--block btn--sm" id="copyOrderBtn">Copy order message</button>' +
       '</div>';
+
+    // Check if they already clicked send (sessionStorage flag set by order-form.js)
+    if (VIVO.cart.hasItems() && sessionStorage.getItem('vivo_wa_drafted') === 'true') {
+        const sendBtn = document.getElementById('sendOrderBtn');
+        if (sendBtn) {
+            sendBtn.disabled = true;
+            sendBtn.textContent = 'Order drafted — check WhatsApp';
+            sendBtn.style.background = 'var(--line-strong)';
+            sendBtn.style.borderColor = 'var(--line-strong)';
+            sendBtn.style.color = 'var(--muted)';
+            sendBtn.style.cursor = 'not-allowed';
+            sendBtn.style.transform = 'none';
+        }
+    }
   }
 
   /* ---------- Quantity / remove interaction ---------- */
@@ -260,6 +279,11 @@
     if (!current) return;
 
     const act = btn.dataset.act;
+    if (act === 'inc' || act === 'dec' || act === 'remove') {
+        // If they modify the cart, remove the drafted flag so they can send an updated order
+        sessionStorage.removeItem('vivo_wa_drafted');
+    }
+
     if (act === 'inc') VIVO.cart.setQty(id, current.qty + 1);
     if (act === 'dec') VIVO.cart.setQty(id, current.qty - 1);
     if (act === 'remove') {
@@ -274,6 +298,10 @@
     const card = input.closest('.citem');
     const id = card.dataset.id;
     const value = parseInt(input.value, 10);
+    
+    // If they modify the cart, remove the drafted flag so they can send an updated order
+    sessionStorage.removeItem('vivo_wa_drafted');
+    
     if (!Number.isFinite(value) || value < 1) {
       VIVO.cart.remove(id);
     } else {

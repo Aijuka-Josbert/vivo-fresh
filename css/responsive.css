@@ -4,10 +4,15 @@
 
 /* ---------- Mobile navigation drawer ---------- */
 @media (max-width: 959px) {
+  /* The drawer container */
   .nav {
-    display: block;
+    display: flex;
+    flex-direction: column;
     position: fixed;
-    inset: var(--header-h) 0 0 0;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: var(--cream);
     padding: 1.5rem var(--gutter) 3rem;
     overflow-y: auto;
@@ -20,41 +25,64 @@
       transform 0.3s var(--ease),
       visibility 0.3s;
     border-top: 1px solid var(--line);
+    z-index: 999;
   }
+
+  /* Open state */
   body.nav-open .nav {
     opacity: 1;
-    transform: none;
+    transform: translateY(0);
     visibility: visible;
     pointer-events: auto;
   }
 
+  /* Stack the links vertically */
   .nav__list {
-    display: grid;
-    gap: 0.15rem;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
   }
+
+  .nav__list li {
+    width: 100%;
+  }
+
   .nav__link {
     display: block;
-    padding: 0.95rem 0.25rem;
-    font-size: 1.1rem;
+    padding: 1.2rem 0.5rem;
     font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--charcoal);
     border-radius: 0;
     border-bottom: 1px solid var(--line);
+    text-align: left;
   }
-  .nav__link:hover {
-    background: transparent;
-    color: var(--green);
-  }
-  .nav__link[aria-current="page"]::after {
-    display: none;
-  }
+
+  .nav__link:hover,
   .nav__link[aria-current="page"] {
+    background: rgba(40, 89, 67, 0.05);
     color: var(--green);
   }
 
+  /* Hide the little gold underline on mobile */
+  .nav__link[aria-current="page"]::after {
+    display: none;
+  }
+
+  /* Make the Shop Now button full width in the menu */
   .nav__cta {
-    margin-top: 1.5rem;
+    display: inline-flex;
+    margin-top: 2rem;
     width: 100%;
-    padding: 0.95rem 1.5rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+  }
+
+  /* Ensure the header stays above the drawer */
+  .site-header {
+    z-index: 1000;
   }
 }
 
@@ -76,6 +104,9 @@
   .header__shop {
     display: inline-flex;
   }
+  .nav__link[aria-current="page"]::after {
+    display: block;
+  } /* Bring back the underline for desktop */
 }
 
 /* ---------- Hero ---------- */
@@ -232,26 +263,32 @@
     grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 1.1fr);
   }
 }
-/* Mobile-only adjustments */
+
+/* ---------- Mobile-specific tweaks for small screens ---------- */
 @media (max-width: 480px) {
-    .pgrid {
-        grid-template-columns: 1fr; /* One column on very small phones */
-        gap: 1.5rem;
-    }
-    
-    .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .chips {
-        flex-wrap: nowrap;
-        overflow-x: auto;
-        padding-bottom: 0.5rem;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    .chip {
-        flex: 0 0 auto;
-    }
+  .pgrid {
+    grid-template-columns: 1fr; /* One column on very small phones */
+    gap: 1.5rem;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+    /* Hide scrollbar for a cleaner look */
+    scrollbar-width: none;
+  }
+  .chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .chip {
+    flex: 0 0 auto;
+  }
 }

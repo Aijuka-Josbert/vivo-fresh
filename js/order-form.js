@@ -106,16 +106,28 @@
         }
 
         const message = buildMessage();
-        VIVO.whatsapp.open(message);
+        const url = VIVO.whatsapp.open(message);
+        sessionStorage.setItem('vivo_wa_drafted', 'true');
 
+        // 1. Show the status message
         showStatus('info',
-            '<strong>WhatsApp has opened with your order ready to send.</strong>' +
-            '<p>Your order has <em>not</em> been received yet. Press <strong>Send</strong> in WhatsApp to deliver the message to VIVO FRESH. ' +
-            'We will then confirm product availability, final prices for range-priced fruits, delivery fees and timing with you.</p>' +
-            '<p class="form-status__small">If WhatsApp did not open, use <strong>Copy order message</strong> and send it to ' +
-            '<a href="https://wa.me/' + VIVO.config.whatsapp.number.intl + '" target="_blank" rel="noopener">' +
-            VIVO.config.whatsapp.number.display + '</a>.'
+            '<strong>WhatsApp has opened in a new tab.</strong>' +
+            '<p>Please press <strong>Send</strong> in the WhatsApp app to deliver your order to us. We will then confirm availability, final prices and delivery.</p>' +
+            '<p class="form-status__small">If WhatsApp did not open, use <strong>Copy order message</strong> and send it manually.</p>'
         );
+
+        // 2. Change the UI to show we are waiting for them to send it
+        const submitBtn = form.querySelector('[type="submit"]');
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Waiting for WhatsApp...';
+
+            // Optional: Re-enable after 10 seconds in case they couldn't send it
+            setTimeout(function () {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Re-send order via WhatsApp';
+            }, 10000);
+        }
     });
 
     const copyBtn = document.getElementById('copyOrderBtn');

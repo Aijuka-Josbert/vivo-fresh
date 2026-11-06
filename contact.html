@@ -47,8 +47,8 @@
             <nav class="nav" id="primaryNav" aria-label="Primary navigation">
                 <ul class="nav__list">
                     <li><a class="nav__link" href="index.html">Home</a></li>
-                    <li><a class="nav__link" href="about.html">About Us</a></li>
                     <li><a class="nav__link" href="products.html">Our Products</a></li>
+                    <li><a class="nav__link" href="about.html">About Us</a></li>
                     <li><a class="nav__link" href="delivery.html">Delivery</a></li>
                     <li><a class="nav__link" href="contact.html" aria-current="page">Contact</a></li>
                 </ul>
@@ -118,9 +118,9 @@
                         <span class="contact-card__label">Location</span>
                         <span class="contact-card__value">Nakasero Market</span>
                         <span class="contact-card__sub">Kampala, Uganda</span>
-                        <a class="link-arrow" style="margin-top:.5rem;"
+                        <!-- <a class="link-arrow" style="margin-top:.5rem;"
                             href="https://www.google.com/maps/search/?api=1&query=Nakasero+Market+Kampala+Uganda"
-                            target="_blank" rel="noopener">Open in Maps →</a>
+                            target="_blank" rel="noopener">Open in Maps →</a> -->
                     </article>
                 </div>
             </div>
@@ -148,28 +148,30 @@
                         <div class="form__grid">
                             <div class="field">
                                 <label for="contactName">Your name <span class="req" aria-hidden="true">*</span></label>
-                                <input id="contactName" name="contactName" type="text" autocomplete="name" required>
+                                <input id="contactName" name="contactName" type="text" autocomplete="name" required
+                                    maxlength="25">
                                 <p class="field__error" data-error-for="contactName" aria-live="polite"></p>
                             </div>
 
                             <div class="field">
                                 <label for="contactEmail">Email address <span class="req"
                                         aria-hidden="true">*</span></label>
-                                <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" required>
+                                <input id="contactEmail" name="contactEmail" type="email" autocomplete="email" required
+                                    maxlength="60">
                                 <p class="field__error" data-error-for="contactEmail" aria-live="polite"></p>
                             </div>
 
                             <div class="field field--full">
                                 <label for="contactSubject">Subject <span class="req"
                                         aria-hidden="true">*</span></label>
-                                <input id="contactSubject" name="contactSubject" type="text" required>
+                                <input id="contactSubject" name="contactSubject" type="text" required maxlength="100">
                                 <p class="field__error" data-error-for="contactSubject" aria-live="polite"></p>
                             </div>
 
                             <div class="field field--full">
                                 <label for="contactMessage">Message <span class="req"
                                         aria-hidden="true">*</span></label>
-                                <textarea id="contactMessage" name="contactMessage" required
+                                <textarea id="contactMessage" name="contactMessage" required maxlength="256"
                                     placeholder="Tell us what you need — products, quantities, your location…"></textarea>
                                 <p class="field__error" data-error-for="contactMessage" aria-live="polite"></p>
                             </div>
@@ -209,15 +211,14 @@
 
             <nav class="footer__col" aria-label="Footer navigation">
                 <h3>Explore</h3>
-               <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About Us</a></li>
-    <li><a href="products.html">Fresh Fruits</a></li>
-    <li><a href="vegetables.html">Vegetables &amp; More</a></li>
-    <li><a href="cart.html">Your Order</a></li>
-    <li><a href="delivery.html">Delivery Information</a></li>
-    <li><a href="contact.html">Contact Us</a></li>
-</ul>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="vegetables.html">Vegetables &amp; More</a></li>
+                    <li><a href="cart.html">Your Order</a></li>
+                    <li><a href="delivery.html">Delivery Information</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
             </nav>
 
             <div class="footer__col">
@@ -225,7 +226,7 @@
                 <ul>
                     <li><a href="https://wa.me/256788733850" target="_blank" rel="noopener">WhatsApp · +256 788 733
                             850</a></li>
-                    
+
                     <li><a href="mailto:amongivivian123@gmail.com">amongivivian123@gmail.com</a></li>
                     <li>Nakasero Market, Kampala, Uganda</li>
                 </ul>
