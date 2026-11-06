@@ -67,6 +67,19 @@
         );
     });
 
+    /* ---------- Live catalogue counts (derived from data arrays) ---------- */
+    (function () {
+        const n = {
+            fruits: (window.VIVO_FRUITS || []).length,
+            veg: (window.VIVO_VEGETABLES || []).length
+        };
+        n.all = n.fruits + n.veg;
+        document.querySelectorAll('[data-count]').forEach(function (el) {
+            const k = el.getAttribute('data-count');
+            if (n[k]) el.textContent = n[k];
+        });
+    })();
+
     /* ---------- Homepage featured strip ---------- */
     const featuredGrid = document.getElementById('featuredGrid');
     if (featuredGrid) {
@@ -147,7 +160,8 @@
         if (!catOk) return false;
         if (!query) return true;
         const haystack = (product.name + ' ' + product.category + ' ' + product.description).toLowerCase();
-        return haystack.indexOf(query) !== -1;
+        /* Every word typed must appear somewhere (order-independent): "red pepper" finds "Pepper, Red" */
+        return query.split(/\s+/).every(function (w) { return haystack.indexOf(w) !== -1; });
     }
 
     function render() {
@@ -182,6 +196,9 @@
     });
 
     if (searchInput) {
+        searchInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && searchInput.value) { clearBtn && clearBtn.click(); }
+        });
         searchInput.addEventListener('input', function () {
             query = searchInput.value.trim().toLowerCase();
             if (clearBtn) clearBtn.hidden = !query;

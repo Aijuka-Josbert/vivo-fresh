@@ -54,6 +54,8 @@
     VIVO.formatPrice = function (p) {
         if (!p) return '';
         if (p.variablePrice) {
+            /* Some variable-price items have no listed range yet — never show "UGX 0 – 0" */
+            if (!p.priceMin || !p.priceMax) return 'Price on WhatsApp';
             return 'UGX ' + nf.format(p.priceMin) + ' – ' + nf.format(p.priceMax);
         }
         return VIVO.formatUGX(p.price);
