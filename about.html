@@ -51,6 +51,7 @@
             <nav class="nav" id="primaryNav" aria-label="Primary navigation">
                 <ul class="nav__list">
                     <li><a class="nav__link" href="index.html">Home</a></li>
+                    <li><a class="nav__link" href="shop.html">Shop All</a></li>
                     <li><a class="nav__link" href="products.html">Fruits</a></li>
                     <li><a class="nav__link" href="vegetables.html">Vegetables</a></li>
                     <li><a class="nav__link" href="vegetables.html?category=Meat">Meat</a></li>
@@ -59,7 +60,7 @@
                     <li><a class="nav__link" href="delivery.html">Delivery</a></li>
                     <li><a class="nav__link" href="contact.html">Contact</a></li>
                 </ul>
-                <a class="btn btn--coral nav__cta" href="products.html">Shop Now</a>
+                <a class="btn btn--coral nav__cta" href="shop.html">Shop Now</a>
             </nav>
 
             <div class="header__actions">
@@ -72,7 +73,7 @@
                     </svg>
                     <span class="cart-link__count js-cart-count" data-count="0">0</span>
                 </a>
-                <a class="btn btn--primary btn--sm header__shop" href="products.html">Shop Now</a>
+                <a class="btn btn--primary btn--sm header__shop" href="shop.html">Shop Now</a>
                 <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="primaryNav"
                     aria-label="Open menu">
                     <span></span><span></span><span></span>
@@ -113,7 +114,7 @@
                         rather than a static list that never changes.
                     </p>
                     <p class="body-text">
-                        Our catalogue currently covers 133 products: local staples like
+                        Our catalogue currently covers <span data-catalog-count="all">131</span> products: local staples like
                         avocados, mangoes, and Sukuma Wiki alongside imported and exotic
                         finds such as blueberries, dragon fruit, and fresh meat. We are
                         constantly updating our range to match what is best at the market.
@@ -132,7 +133,7 @@
                         <p class="eyebrow">What we offer</p>
                         <h3 class="h3">Produce, and the convenience around it.</h3>
                         <p style="margin-top: 0.75rem">
-                            A varied catalogue of 133 products, clear unit pricing, an
+                            A varied catalogue of <span data-catalog-count="all">131</span> products, clear unit pricing, an
                             order-building tool that works on a phone, and a direct line to
                             our team on WhatsApp. Delivery is available across Uganda,
                             arranged with each customer individually.
@@ -261,7 +262,7 @@
                 <div class="cta-banner reveal">
                     <h2 class="h2">See what's in the market today.</h2>
                     <p>
-                        Browse all 133 products, build your order and send it to us on
+                        Browse all <span data-catalog-count="all">131</span> products, build your order and send it to us on
                         WhatsApp.
                     </p>
                     <div class="cta-banner__actions">

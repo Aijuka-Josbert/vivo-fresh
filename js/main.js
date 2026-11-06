@@ -201,3 +201,14 @@
         }
     }
 })();
+
+/* ---------- Live catalogue counts: <span data-catalog-count="all|fruits|veg"> ---------- */
+(function () {
+    'use strict';
+    var f = (window.VIVO_FRUITS || []).length, v = (window.VIVO_VEGETABLES || []).length;
+    var n = { fruits: f, veg: v, all: f + v };
+    document.querySelectorAll('[data-catalog-count]').forEach(function (el) {
+        var k = el.getAttribute('data-catalog-count');
+        if (n[k]) el.textContent = n[k];
+    });
+})();

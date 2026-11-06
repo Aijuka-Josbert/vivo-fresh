@@ -67,19 +67,6 @@
         );
     });
 
-    /* ---------- Live catalogue counts (derived from data arrays) ---------- */
-    (function () {
-        const n = {
-            fruits: (window.VIVO_FRUITS || []).length,
-            veg: (window.VIVO_VEGETABLES || []).length
-        };
-        n.all = n.fruits + n.veg;
-        document.querySelectorAll('[data-count]').forEach(function (el) {
-            const k = el.getAttribute('data-count');
-            if (n[k]) el.textContent = n[k];
-        });
-    })();
-
     /* ---------- Homepage featured strip ---------- */
     const featuredGrid = document.getElementById('featuredGrid');
     if (featuredGrid) {
@@ -92,6 +79,13 @@
     }
 
     /* ---------- Homepage category tiles ---------- */
+    /* Category tile photo = the first real product photo in that category (no new assets) */
+    function tilePhoto(cat) {
+        const hit = (VIVO.products || []).concat(window.VIVO_VEGETABLES || []).find(function (p) {
+            return p.category === cat && p.image;
+        });
+        return hit ? '<img class="cattile__img" src="' + esc(hit.image) + '" alt="" loading="lazy" decoding="async">' : '';
+    }
     const categoryGrid = document.getElementById('categoryGrid');
     if (categoryGrid) {
         /* Homepage shows fruit categories only — veg has its own page */
@@ -101,12 +95,50 @@
             if (!n) return '';
             return '' +
                 '<a class="cattile" href="products.html?category=' + encodeURIComponent(cat) + '" data-tone="' + VIVO.toneFor(cat) + '">' +
-                '<span class="cattile__glow" aria-hidden="true"></span>' +
+                tilePhoto(cat) + '<span class="cattile__glow" aria-hidden="true"></span>' +
                 '<span class="cattile__name">' + esc(cat) + '</span>' +
                 '<span class="cattile__count">' + n + ' ' + (n === 1 ? 'product' : 'products') + '</span>' +
                 '<span class="cattile__arrow" aria-hidden="true">→</span>' +
                 '</a>';
         }).join('');
+    }
+
+    /* ---------- Homepage: vegetable / spice / meat category tiles ---------- */
+    const vegCategoryGrid = document.getElementById('vegCategoryGrid');
+    if (vegCategoryGrid) {
+        const veg = window.VIVO_VEGETABLES || [];
+        const cats = VIVO.CATEGORIES.filter(function (c) { return veg.some(function (p) { return p.category === c; }); });
+        vegCategoryGrid.innerHTML = cats.map(function (cat) {
+            const n = veg.filter(function (p) { return p.category === cat; }).length;
+            return '<a class="cattile" href="vegetables.html?category=' + encodeURIComponent(cat) + '" data-tone="' + VIVO.toneFor(cat) + '">' +
+                tilePhoto(cat) + '<span class="cattile__glow" aria-hidden="true"></span>' +
+                '<span class="cattile__name">' + esc(cat) + '</span>' +
+                '<span class="cattile__count">' + n + ' ' + (n === 1 ? 'product' : 'products') + '</span>' +
+                '<span class="cattile__arrow" aria-hidden="true">→</span></a>';
+        }).join('');
+    }
+
+    /* ---------- Floating "your order" bar (all pages with product cards) ---------- */
+    if (document.querySelector('[data-add]') || document.getElementById('productGrid') || featuredGrid) {
+        const bar = document.createElement('a');
+        bar.className = 'orderbar';
+        bar.href = 'cart.html';
+        bar.hidden = true;
+        bar.setAttribute('aria-live', 'polite');
+        document.body.appendChild(bar);
+        const refreshBar = function () {
+            const lines = VIVO.cart.lines();
+            const count = lines.reduce(function (t, l) { return t + l.qty; }, 0);
+            bar.hidden = !lines.length;
+            const fixed = VIVO.cart.subtotal();
+            const hasVar = VIVO.cart.variableLines().length > 0;
+            const money = fixed > 0 ? 'UGX ' + new Intl.NumberFormat('en-UG').format(fixed) + (hasVar ? ' + items to confirm' : '') : (hasVar ? 'Price to confirm' : '');
+            bar.innerHTML = '<span><b>' + lines.length + (lines.length === 1 ? ' item' : ' items') + '</b>' +
+                (money ? '<small>' + money + '</small>' : '') + '</span><strong>View order →</strong>';
+            bar.setAttribute('aria-label', 'Review your order: ' + lines.length + ' items, ' + count + ' units');
+        };
+        VIVO.cart.onChange(refreshBar);
+        refreshBar();
     }
 
     /* ---------- Catalogue page ---------- */
@@ -140,6 +172,30 @@
     const params = new URLSearchParams(window.location.search);
     let activeCategory = params.get('category') || 'All';
     let query = '';
+    let sortMode = 'default';
+
+    /* Sort control, injected once so both catalogue pages share one implementation */
+    const toolbarEl = document.querySelector('.toolbar');
+    if (toolbarEl) {
+        const sortWrap = document.createElement('label');
+        sortWrap.className = 'toolbar__sort';
+        sortWrap.innerHTML = '<span>Sort by</span><select id="productSort">' +
+            '<option value="default">Featured order</option>' +
+            '<option value="name">Name A–Z</option>' +
+            '<option value="low">Price: low to high</option>' +
+            '<option value="high">Price: high to low</option></select>';
+        const countNode = document.getElementById('resultCount');
+        toolbarEl.insertBefore(sortWrap, countNode);
+        sortWrap.querySelector('select').addEventListener('change', function (e) {
+            sortMode = e.target.value;
+            render();
+        });
+    }
+    /* Variable-price items sort by the low end of their listed range; unpriced ones go last. */
+    function sortKey(p) {
+        const v = p.variablePrice ? p.priceMin : p.price;
+        return v > 0 ? v : Infinity;
+    }
 
     if (!['All'].concat(SCOPE_CATEGORIES).includes(activeCategory)) activeCategory = 'All';
 
@@ -164,8 +220,33 @@
         return query.split(/\s+/).every(function (w) { return haystack.indexOf(w) !== -1; });
     }
 
+    let clearFilters = null;
+    if (toolbarEl) {
+        clearFilters = document.createElement('button');
+        clearFilters.type = 'button';
+        clearFilters.className = 'toolbar__clear';
+        clearFilters.textContent = 'Clear filters';
+        clearFilters.hidden = true;
+        toolbarEl.appendChild(clearFilters);
+        clearFilters.addEventListener('click', function () {
+            query = ''; activeCategory = 'All'; sortMode = 'default';
+            if (searchInput) searchInput.value = '';
+            if (clearBtn) clearBtn.hidden = true;
+            const sel = document.getElementById('productSort'); if (sel) sel.value = 'default';
+            const url = new URL(window.location.href); url.searchParams.delete('category'); history.replaceState({}, '', url);
+            render();
+        });
+    }
+
     function render() {
+        if (clearFilters) clearFilters.hidden = !(query || activeCategory !== 'All' || sortMode !== 'default');
         const results = SCOPE_POOL.filter(matches);
+        if (sortMode === 'name') results.sort(function (a, b) { return a.name.localeCompare(b.name); });
+        if (sortMode === 'low') results.sort(function (a, b) { return sortKey(a) - sortKey(b); });
+        if (sortMode === 'high') results.sort(function (a, b) {
+            const x = sortKey(a), y = sortKey(b);
+            return (y === Infinity ? -1 : y) - (x === Infinity ? -1 : x);
+        });
         grid.innerHTML = results.map(VIVO.renderProductCard).join('');
         grid.querySelectorAll('.reveal').forEach(function (card) { card.classList.add('is-in'); });
 
@@ -173,7 +254,7 @@
         if (emptyState) emptyState.hidden = results.length !== 0;
 
         if (countEl) {
-            const noun = SCOPE === 'fruits' ? 'fruits' : (SCOPE === 'veg' ? 'products' : 'products');
+            const noun = SCOPE === 'fruits' ? 'fruits' : 'products';
             countEl.textContent = results.length === 0
                 ? 'No ' + noun + ' match your search'
                 : 'Showing ' + results.length + ' of ' + SCOPE_POOL.length + ' ' + noun;

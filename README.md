@@ -134,7 +134,7 @@ Open `js/config.js`:
 
 ```js
 whatsapp: {
-  orderNumber: "256755554669",   // <- number that RECEIVES website orders
+  orderNumber: "256788733850",   // <- the single number that RECEIVES website orders
   primary:  { intl: "256788733850", display: "+256 788 733 850", label: "WhatsApp" },
 }
 ```
@@ -318,7 +318,7 @@ These items are deliberately **not invented** on the site. Please confirm before
 | 4 | **Estimated delivery timeframes** per area | Currently confirmed per order only |
 | 5 | **Approved Vision / Mission / Goals wording** | Current text is clearly-marked draft placeholder |
 | 6 | **Social media URLs** (Facebook, Instagram, TikTok, X, YouTube) | Currently placeholders in the footer |
-| 7 | **Whether both WhatsApp numbers should receive orders** | Currently all web orders go to +256 755 554 669 |
+| 7 | ~~Second WhatsApp number~~ | Resolved: owner confirmed one number only (+256 788 733 850) |
 | 8 | **Preferred contact email confirmation** — is `amongivivian123@gmail.com` the long-term business address? | Used for the contact form and footer |
 | 9 | **Product photography** — supply real photos for all 43 fruits | Site currently uses designed fallback tiles |
 | 10 | **Stock/seasonality flags** — should some fruits show as "out of season"? | The `available` field exists but all are `true` |
@@ -341,3 +341,10 @@ These items are deliberately **not invented** on the site. Please confirm before
 ---
 
 © VIVO FRESH @ UGANDA. Built as a static commercial website.
+---
+
+## Enabling the contact form (Web3Forms — when you have the access key)
+
+1. Create the key at web3forms.com using the business email (`amongivivian123@gmail.com`).
+2. In `js/config.js`, set `email.provider: "web3forms"` and paste the key into `email.web3formsAccessKey`.
+3. Deploy, send a test message from `contact.html`, and confirm it arrives. Until then the form tells visitors it is not connected and points them to WhatsApp/email (it never pretends to send).

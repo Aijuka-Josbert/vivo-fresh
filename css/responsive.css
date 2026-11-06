@@ -24,8 +24,10 @@
     background: var(--cream) !important;
     padding: 2rem var(--gutter) !important;
 
-    /* NO SCROLLING */
-    overflow-y: hidden !important;
+    /* Scrolls on short screens so the last links and CTA stay reachable */
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    max-height: calc(100vh - var(--header-h)) !important;
 
     /* Animation states */
     transform: translateY(-10px) !important;
@@ -324,3 +326,118 @@
     flex: 0 0 auto;
   }
 }
+
+
+/* ============================================================
+   UX PASS — sort, price note, order bar, vegetable tiles, mobile
+   ============================================================ */
+.pricenote {
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(241, 163, 74, 0.14);
+  border: 1px solid rgba(241, 163, 74, 0.45);
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  color: var(--charcoal);
+}
+.toolbar__sort {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.toolbar__sort select {
+  min-height: 44px;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  color: var(--charcoal);
+  font: inherit;
+}
+.catgroup__title {
+  margin: 1.75rem 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--green);
+}
+.orderbar {
+  position: fixed;
+  left: 50%;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(92vw, 460px);
+  padding: 0.85rem 1.2rem;
+  background: var(--green);
+  color: #fff;
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(28, 64, 48, 0.35);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.orderbar[hidden] { display: none; }
+.orderbar strong { color: var(--gold-soft); white-space: nowrap; }
+.summary__clear { margin-top: 0.5rem; }
+body { padding-bottom: 4.5rem; }
+.chip, .pcard__add, .stepper__btn, .citem__remove { min-height: 44px; }
+.stepper__btn { min-width: 44px; }
+
+@media (max-width: 480px) {
+  /* Two compact columns instead of one very long list (320px-safe) */
+  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+  .pcard__name { font-size: 0.95rem; }
+  .pcard__foot { flex-wrap: wrap; gap: 0.5rem; }
+  .pcard__add { flex: 1 1 100%; }
+  /* Category chips become one swipeable row instead of a tall wrapped block */
+  .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.4rem; scrollbar-width: thin; }
+  .chip { white-space: nowrap; }
+  .toolbar__sort { justify-content: space-between; }
+  .orderbar { font-size: 0.82rem; padding: 0.75rem 1rem; }
+}
+@media (max-width: 360px) {
+  .pcard__body { padding: 0.7rem; }
+  .pcard__price { font-size: 0.92rem; }
+}
+
+
+/* ============================================================
+   SHOP-FIRST POLISH — photo category tiles, scannable cards, order bar
+   ============================================================ */
+.cattile__img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: -2;
+  transition: transform 0.7s var(--ease);
+}
+.cattile:hover .cattile__img { transform: scale(1.06); }
+.cattile::after {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(28,64,48,0) 25%, rgba(28,64,48,0.88) 100%);
+}
+.cattile__name { text-shadow: 0 1px 8px rgba(0,0,0,0.35); }
+
+/* Product names and prices are read fast: sans-serif, not decorative serif */
+.pcard__name { font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.005em; }
+.pcard__price { font-family: var(--font-sans); font-weight: 700; }
+.pcard { display: flex; flex-direction: column; height: 100%; }
+.pcard__body { display: flex; flex-direction: column; flex: 1; }
+.pcard__foot { margin-top: auto; }
+
+.orderbar span { display: flex; flex-direction: column; line-height: 1.25; }
+.orderbar small { color: rgba(255,255,255,0.8); font-size: 0.78rem; }
+.toolbar__clear {
+  min-height: 44px; padding: 0.45rem 1rem; border: 1px solid var(--line-strong);
+  border-radius: 999px; background: transparent; color: var(--green); font: inherit; font-weight: 600; cursor: pointer;
+}
+.toolbar__clear[hidden] { display: none; }
+#categories { scroll-margin-top: calc(var(--header-h, 72px) + 1rem); }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+@media (max-width: 480px) { .cattile { min-height: 132px; padding: 0.8rem; } }

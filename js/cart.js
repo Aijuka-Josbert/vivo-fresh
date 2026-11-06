@@ -251,6 +251,7 @@
         '<button type="submit" form="orderForm" class="btn btn--coral btn--block" id="sendOrderBtn">Send order via WhatsApp</button>' +
         '<p class="summary__safe">Opening WhatsApp does <strong>not</strong> place your order — you must press <strong>Send</strong> in WhatsApp. We will then confirm availability, final prices and delivery.</p>' +
         '<button type="button" class="btn btn--ghost btn--block btn--sm" id="copyOrderBtn">Copy order message</button>' +
+        '<button type="button" class="btn btn--ghost btn--block btn--sm summary__clear" id="clearOrderBtn">Clear whole order</button>' +
       '</div>';
 
     // Check if they already clicked send (sessionStorage flag set by order-form.js)
@@ -264,6 +265,18 @@
             sendBtn.style.color = 'var(--muted)';
             sendBtn.style.cursor = 'not-allowed';
             sendBtn.style.transform = 'none';
+            if (!document.getElementById('resendBtn')) {
+                const again = document.createElement('button');
+                again.type = 'button';
+                again.id = 'resendBtn';
+                again.className = 'btn btn--ghost btn--block btn--sm';
+                again.textContent = 'WhatsApp did not open? Send again';
+                again.addEventListener('click', function () {
+                    sessionStorage.removeItem('vivo_wa_drafted');
+                    render();
+                });
+                sendBtn.insertAdjacentElement('afterend', again);
+            }
         }
     }
   }
@@ -302,10 +315,24 @@
     // If they modify the cart, remove the drafted flag so they can send an updated order
     sessionStorage.removeItem('vivo_wa_drafted');
     
+    /* A blank or 0 entry used to delete the line silently. Restore a safe quantity instead;
+       the Remove button is the only way to delete. */
     if (!Number.isFinite(value) || value < 1) {
-      VIVO.cart.remove(id);
+      const cur = VIVO.cart.get().find(function (i) { return i.id === id; });
+      input.value = cur ? cur.qty : 1;
+      VIVO.toast('Quantity must be at least 1. Use Remove to delete an item.');
     } else {
       VIVO.cart.setQty(id, value);
+    }
+  });
+
+  /* Clear whole order (asks first so a stray tap cannot wipe the cart) */
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('#clearOrderBtn')) return;
+    if (window.confirm('Remove every item from your order?')) {
+      sessionStorage.removeItem('vivo_wa_drafted');
+      VIVO.cart.clear();
+      VIVO.toast('Your order has been cleared.');
     }
   });
 

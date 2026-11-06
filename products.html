@@ -55,6 +55,7 @@
             <nav class="nav" id="primaryNav" aria-label="Primary navigation">
                 <ul class="nav__list">
                     <li><a class="nav__link" href="index.html">Home</a></li>
+                    <li><a class="nav__link" href="shop.html">Shop All</a></li>
                     <li><a class="nav__link" href="products.html">Fruits</a></li>
                     <li><a class="nav__link" href="vegetables.html">Vegetables</a></li>
                     <li><a class="nav__link" href="vegetables.html?category=Meat">Meat</a></li>
@@ -62,7 +63,7 @@
                     <li><a class="nav__link" href="delivery.html">Delivery</a></li>
                     <li><a class="nav__link" href="contact.html">Contact</a></li>
                 </ul>
-                <a class="btn btn--coral nav__cta" href="products.html">Shop Now</a>
+                <a class="btn btn--coral nav__cta" href="shop.html">Shop Now</a>
             </nav>
 
             <div class="header__actions">
@@ -93,7 +94,7 @@
                     <a href="index.html">Home</a> <span aria-hidden="true">/</span> <span aria-current="page">Fresh
                         Fruits</span>
                 </nav>
-                <p class="eyebrow">Fruit catalogue · <span data-count="fruits">43</span> varieties</p>
+                <p class="eyebrow">Fruit catalogue · <span data-catalog-count="fruits">43</span> varieties</p>
                 <h1 class="h1">Fresh fruit, from the market.</h1>
                 <p class="lede">Search the full fruit range or filter by category. Add what you want to your order, then
                     send it to us on WhatsApp — we will confirm availability, any range prices, and delivery with you.
@@ -115,7 +116,7 @@
                     <span class="sector-switch__text">
                         <span class="sector-switch__eyebrow">Also shopping for</span>
                         <span class="sector-switch__title">Vegetables, spices &amp; meat →</span>
-                        <span class="sector-switch__sub">90 more products at the market</span>
+                        <span class="sector-switch__sub"><span data-catalog-count="veg">88</span> more products at the market</span>
                     </span>
                 </a>
             </div>
@@ -123,6 +124,8 @@
 
         <section class="section" style="padding-top:0;">
             <div class="wrap">
+                <p class="pricenote"><strong>How prices work:</strong> most items have a fixed price. Items shown as a range, or as
+                    &ldquo;Price on WhatsApp&rdquo;, are confirmed with you on WhatsApp before your order total is final.</p>
                 <div class="toolbar">
                     <div class="toolbar__search">
                         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -142,7 +145,7 @@
 
                 <div class="empty-state" id="emptyState" hidden>
                     <h3>No fruits match that search</h3>
-                    <p>Try a different word, or clear the filters to see all <span data-count="fruits">43</span> fruits.</p>
+                    <p>Try a different word, or clear the filters to see all <span data-catalog-count="fruits">43</span> fruits.</p>
                     <button type="button" class="btn btn--ghost"
                         onclick="document.getElementById('clearSearch').click();document.querySelector('.chip[data-cat=\'All\']').click();">Show
                         all fruits</button>
