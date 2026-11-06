@@ -14,7 +14,7 @@ window.VIVO_FRUITS = [
     {
         id: "blueberry", name: "Blueberry", category: "Berries",
         description: "Plump, deep-blue berries with a bright, tangy sweetness.",
-        image: "./assets/images/fruits/blueberry.avif",
+        image: "./assets/images/fruits/Blueberry.jpg",
         unit: "packet", price: 19500, priceMin: null, priceMax: null,
         variablePrice: false, available: true
     },
@@ -126,7 +126,7 @@ window.VIVO_FRUITS = [
     {
         id: "grapes", name: "Grapes (packet)", category: "Everyday Fruits",
         description: "A packet of juicy grapes, sweet and easy to share.",
-        image: "./assets/images/fruits/grapefruit.jpg",
+        image: "./assets/images/fruits/grapes.jpg",
         unit: "packet", price: 14000, priceMin: null, priceMax: null,
         variablePrice: false, available: true
     },

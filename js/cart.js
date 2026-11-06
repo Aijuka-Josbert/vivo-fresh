@@ -231,13 +231,17 @@
           (variable.length
             ? '<div><dt>Range-priced items</dt><dd class="summary__muted">To be confirmed</dd></div>'
             : '') +
-          '<div><dt>Delivery</dt><dd class="summary__muted">Confirmed on WhatsApp</dd></div>' +
+          '<div><dt>Delivery</dt><dd class="summary__muted">Fee applies (confirmed on WhatsApp)</dd></div>' +
         '</dl>' +
         '<div class="summary__total">' +
           '<span>Subtotal' + (variable.length ? ' (fixed items)' : '') + '</span>' +
           '<strong>' + VIVO.formatUGX(fixedSubtotal) + '</strong>' +
         '</div>' +
         variableBlock +
+        '<div class="summary__var" style="background: rgba(40, 89, 67, 0.08); border-color: rgba(40, 89, 67, 0.2); margin-bottom: 1rem;">' +
+          '<p style="font-weight: 600; color: var(--green);">Payment Method: Cash on Delivery</p>' +
+          '<p style="margin-top: 0.25rem; color: var(--charcoal); font-size: 0.8rem;">We accept cash upon delivery. No online payment is required.</p>' +
+        '</div>' +
         '<p class="summary__note">Delivery fees are not calculated here. VIVO FRESH will confirm delivery fees and timing with you before the order is completed.</p>' +
         '<button type="submit" form="orderForm" class="btn btn--coral btn--block" id="sendOrderBtn">Send order via WhatsApp</button>' +
         '<p class="summary__safe">Opening WhatsApp does <strong>not</strong> place your order — you must press <strong>Send</strong> in WhatsApp. We will then confirm availability, final prices and delivery.</p>' +

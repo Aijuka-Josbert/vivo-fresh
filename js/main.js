@@ -119,7 +119,7 @@
         window.addEventListener('scroll', onScroll, { passive: true });
     }
 
-    /* ---------- Mobile navigation ---------- */
+       /* ---------- Mobile navigation ---------- */
     const navToggle = document.getElementById('navToggle');
     const body = document.body;
     if (navToggle) {

@@ -731,17 +731,40 @@ body.nav-open .nav-toggle span:nth-child(3) {
   background: linear-gradient(150deg, #e7a05a, #a8492f);
 }
 /* Vegetable / spice / meat fallback tones */
-[data-tone="leafy"]    .media-fallback { background: linear-gradient(150deg, #6BA368, #2F5D3A); }
-[data-tone="root"]     .media-fallback { background: linear-gradient(150deg, #C77B3E, #7A3E1E); }
-[data-tone="chilli"]   .media-fallback { background: linear-gradient(150deg, #D64B3A, #7A1E14); }
-[data-tone="tomato"]   .media-fallback { background: linear-gradient(150deg, #D95A45, #8B2E22); }
-[data-tone="beans"]    .media-fallback { background: linear-gradient(150deg, #7FA35A, #3E5C24); }
-[data-tone="gourd"]    .media-fallback { background: linear-gradient(150deg, #9DBB6C, #4E6B2A); }
-[data-tone="mushroom"] .media-fallback { background: linear-gradient(150deg, #A08871, #4E3C2B); }
-[data-tone="herb"]     .media-fallback { background: linear-gradient(150deg, #79A86C, #345A29); }
-[data-tone="veg"]      .media-fallback { background: linear-gradient(150deg, #6E9B57, #2F5124); }
-[data-tone="spice"]    .media-fallback { background: linear-gradient(150deg, #C07A2E, #6E3E12); }
-[data-tone="meat"]     .media-fallback { background: linear-gradient(150deg, #A8574A, #5E2620); }
+[data-tone="leafy"] .media-fallback {
+  background: linear-gradient(150deg, #6ba368, #2f5d3a);
+}
+[data-tone="root"] .media-fallback {
+  background: linear-gradient(150deg, #c77b3e, #7a3e1e);
+}
+[data-tone="chilli"] .media-fallback {
+  background: linear-gradient(150deg, #d64b3a, #7a1e14);
+}
+[data-tone="tomato"] .media-fallback {
+  background: linear-gradient(150deg, #d95a45, #8b2e22);
+}
+[data-tone="beans"] .media-fallback {
+  background: linear-gradient(150deg, #7fa35a, #3e5c24);
+}
+[data-tone="gourd"] .media-fallback {
+  background: linear-gradient(150deg, #9dbb6c, #4e6b2a);
+}
+[data-tone="mushroom"] .media-fallback {
+  background: linear-gradient(150deg, #a08871, #4e3c2b);
+}
+[data-tone="herb"] .media-fallback {
+  background: linear-gradient(150deg, #79a86c, #345a29);
+}
+[data-tone="veg"] .media-fallback {
+  background: linear-gradient(150deg, #6e9b57, #2f5124);
+}
+[data-tone="spice"] .media-fallback {
+  background: linear-gradient(150deg, #c07a2e, #6e3e12);
+}
+[data-tone="meat"] .media-fallback {
+  background: linear-gradient(150deg, #a8574a, #5e2620);
+}
+
 /* ============================================================
    INTRO
    ============================================================ */
@@ -1899,58 +1922,85 @@ body.nav-open .nav-toggle span:nth-child(3) {
 .toast__action:hover {
   text-decoration: underline;
 }
+
 /* ============================================================
    SECTOR SWITCH — cross-link between fruits and vegetables
    ============================================================ */
 .sector-switch {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-    border-radius: var(--radius);
-    background: var(--white);
-    border: 1px solid var(--line-strong);
-    text-decoration: none;
-    color: var(--charcoal);
-    transition: transform .25s var(--ease), box-shadow .25s var(--ease),
-                border-color .25s var(--ease), background .25s var(--ease);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  text-decoration: none;
+  color: var(--charcoal);
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    background 0.25s var(--ease);
 }
 .sector-switch:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
-    border-color: var(--green);
-    background: #FFFBF5;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--green);
+  background: #fffbf5;
 }
 .sector-switch__icon {
-    flex: none;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background: rgba(40, 89, 67, .08);
-    display: grid;
-    place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(40, 89, 67, 0.08);
+  display: grid;
+  place-items: center;
 }
-.sector-switch__icon svg { width: 24px; height: 24px; display: block; }
-.sector-switch__text { display: grid; gap: .15rem; min-width: 0; }
+.sector-switch__icon svg {
+  width: 24px !important;
+  height: 24px !important;
+  display: block;
+  max-width: 100%;
+}
+.sector-switch__text {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
 .sector-switch__eyebrow {
-    font-size: .68rem;
-    letter-spacing: .16em;
-    text-transform: uppercase;
-    font-weight: 700;
-    color: var(--muted);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--muted);
 }
 .sector-switch__title {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--green);
-    line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--green);
+  line-height: 1.2;
 }
-.sector-switch__sub { font-size: .8rem; color: var(--muted); }
+.sector-switch__sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
 
 @media (min-width: 700px) {
-    .sector-switch { padding: 1.15rem 1.6rem; gap: 1.25rem; }
-    .sector-switch__icon { width: 56px; height: 56px; }
-    .sector-switch__icon svg { width: 28px; height: 28px; }
-    .sector-switch__title { font-size: 1.3rem; }
+  .sector-switch {
+    padding: 1.15rem 1.6rem;
+    gap: 1.25rem;
+  }
+  .sector-switch__icon {
+    width: 56px;
+    height: 56px;
+  }
+  .sector-switch__icon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .sector-switch__title {
+    font-size: 1.3rem;
+  }
 }

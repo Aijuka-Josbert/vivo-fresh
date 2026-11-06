@@ -232,3 +232,26 @@
     grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 1.1fr);
   }
 }
+/* Mobile-only adjustments */
+@media (max-width: 480px) {
+    .pgrid {
+        grid-template-columns: 1fr; /* One column on very small phones */
+        gap: 1.5rem;
+    }
+    
+    .toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .chips {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .chip {
+        flex: 0 0 auto;
+    }
+}

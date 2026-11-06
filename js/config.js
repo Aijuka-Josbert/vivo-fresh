@@ -17,11 +17,8 @@ window.VIVO_CONFIG = {
   },
 
   whatsapp: {
-    /* Number that RECEIVES website orders. Digits only, international format. */
-    orderNumber: "256788733850",
-    /* Display + contact numbers */
-    primary:  { intl: "256788733850", display: "+256 788 733 850", label: "WhatsApp" },
-    // business: { intl: "256755554669", display: "+256 755 554 669", label: "WhatsApp Business" }
+    /* THE ONLY WhatsApp number used across this website. */
+    number: { intl: "256788733850", display: "+256 788 733 850" }
   },
 
   email: {

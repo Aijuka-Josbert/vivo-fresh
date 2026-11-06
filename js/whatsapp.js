@@ -65,7 +65,8 @@
         }
 
         L.push('');
-        L.push('Please confirm product availability, delivery fees and estimated delivery time.');
+        L.push('NOTE: I will pay cash on delivery. Please confirm the delivery fee.');
+        L.push('Please confirm product availability and estimated delivery time.');
         L.push('');
         L.push('Thank you!');
 
