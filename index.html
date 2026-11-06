@@ -85,7 +85,10 @@
                         <a class="nav__link" href="index.html" aria-current="page">Home</a>
                     </li>
                     <li><a class="nav__link" href="products.html">Fruits</a></li>
-                    <li><a class="nav__link" href="vegetables.html">Vegetables &amp; More</a></li>
+                    <li><a class="nav__link" href="vegetables.html">Vegetables</a></li>
+                    <li>
+                        <a class="nav__link" href="vegetables.html?category=Meat">Meat</a>
+                    </li>
                     <li><a class="nav__link" href="about.html">About Us</a></li>
                     <li><a class="nav__link" href="delivery.html">Delivery</a></li>
                     <li><a class="nav__link" href="contact.html">Contact</a></li>
@@ -131,14 +134,15 @@
                         favourites to exotic discoveries, enjoy convenient ordering and
                         delivery wherever you are in Uganda.
                     </p>
-                    <div class="hero__actions">
-                        <a class="btn btn--coral" href="products.html">Shop Fresh Fruits</a>
-                        <a class="btn btn--primary" href="vegetables.html">Shop Vegetables &amp; Meat</a>
+                    <div class="hero__actions" style="display: flex; flex-wrap: wrap; gap: 0.75rem">
+                        <a class="btn btn--coral" href="products.html">Shop Fruits</a>
+                        <a class="btn btn--primary" href="vegetables.html">Shop Vegetables</a>
+                        <a class="btn btn--ghost" href="vegetables.html?category=Meat">Shop Meat</a>
                     </div>
                     <ul class="hero__meta">
-                        <li>133 fresh products</li>
-                        <li>Delivered all over Uganda</li>
-                        <li>Order in minutes</li>
+                        <li>Fruits</li>
+                        <li>Vegetables</li>
+                        <li>Spices &amp; Meat</li>
                     </ul>
                 </div>
 
@@ -175,28 +179,49 @@
             </div>
         </section>
 
-                <!-- ============ QUICK LINKS ============ -->
-        <section class="section section--tight" style="padding-top: 0;">
+        <!-- ============ QUICK LINKS ============ -->
+        <section class="section section--tight" style="padding-top: 0">
             <div class="wrap">
-                <div class="valuegrid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
-                    <a href="products.html?category=Tropical%20Fruits" class="value" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
-                        <span style="font-size: 2rem;">🍍</span>
+                <div class="valuegrid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr))">
+                    <a href="products.html?category=Tropical%20Fruits" class="value" style="
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+              ">
+                        <span style="font-size: 2rem">🍍</span>
                         <div>
-                            <h3 class="value__title" style="margin-bottom: 0;">Tropical Fruits</h3>
+                            <h3 class="value__title" style="margin-bottom: 0">
+                                Tropical Fruits
+                            </h3>
                             <p class="value__text">Mangoes, Pineapples, Avocados</p>
                         </div>
                     </a>
-                    <a href="vegetables.html" class="value" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
-                        <span style="font-size: 2rem;">🥦</span>
+                    <a href="vegetables.html" class="value" style="
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+              ">
+                        <span style="font-size: 2rem">🥦</span>
                         <div>
-                            <h3 class="value__title" style="margin-bottom: 0;">Fresh Vegetables</h3>
+                            <h3 class="value__title" style="margin-bottom: 0">
+                                Fresh Vegetables
+                            </h3>
                             <p class="value__text">Spinach, Tomatoes, Peppers</p>
                         </div>
                     </a>
-                    <a href="vegetables.html?category=Meat" class="value" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
-                        <span style="font-size: 2rem;">🍗</span>
+                    <a href="vegetables.html?category=Meat" class="value" style="
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+              ">
+                        <span style="font-size: 2rem">🍗</span>
                         <div>
-                            <h3 class="value__title" style="margin-bottom: 0;">Meat &amp; Poultry</h3>
+                            <h3 class="value__title" style="margin-bottom: 0">
+                                Meat &amp; Poultry
+                            </h3>
                             <p class="value__text">Chicken, Beef, Goat Meat</p>
                         </div>
                     </a>
@@ -351,7 +376,8 @@
                     <div class="step reveal">
                         <h3 class="step__title">We confirm, then deliver</h3>
                         <p class="step__text">
-                            Our team confirms availability, delivery fees and timing with you directly. Pay easily with <strong>Cash on Delivery</strong>.
+                            Our team confirms availability, delivery fees and timing with
+                            you directly. Pay easily with <strong>Cash on Delivery</strong>.
                         </p>
                     </div>
                 </div>
@@ -446,7 +472,8 @@
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="products.html">Fresh Fruits</a></li>
-                    <li><a href="vegetables.html">Vegetables &amp; More</a></li>
+                    <li><a href="vegetables.html">Vegetables</a></li>
+                    <li><a href="vegetables.html?category=Meat">Meat</a></li>
                     <li><a href="cart.html">Your Order</a></li>
                     <li><a href="delivery.html">Delivery Information</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
