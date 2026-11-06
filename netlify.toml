@@ -1,14 +1,45 @@
 [build]
   publish = "."
 
+# ---------------------------------------------------------------
+# Security headers (all pages)
+# NOTE: script-src keeps 'unsafe-inline' because the pages use small inline
+# scripts/onerror handlers. Everything else is locked to this site, so injected
+# scripts/styles/images from other origins and clickjacking/framing are blocked.
+# If you add a new third-party (analytics, form provider) add it to connect-src.
+# ---------------------------------------------------------------
 [[headers]]
   for = "/*"
   [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com https://formspree.io; form-action 'self' https://api.web3forms.com https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
     X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Cross-Origin-Opener-Policy = "same-origin-allow-popups"
+    Cross-Origin-Resource-Policy = "same-origin"
 
+# Pages: always revalidate so edits show up immediately
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# CSS/JS: fast repeat visits, but refreshed within the hour after you deploy
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Images: 7 days (NOT "immutable/1 year": file names are not hashed, so a replaced
+# photo such as about-photo.jpg would otherwise stay stale for visitors for a year)
 [[headers]]
   for = "/assets/*"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"

@@ -25,15 +25,15 @@
 
         return '' +
             '<article class="pcard reveal" data-id="' + product.id + '" data-category="' + esc(product.category) + '">' +
-            '<div class="pcard__media" data-media data-tone="' + tone + '">' +
+            '<a class="pcard__media" href="product.html?id=' + encodeURIComponent(product.id) + '" aria-label="View details: ' + esc(product.name) + '" data-media data-tone="' + tone + '">' +
             '<img src="' + product.image + '" alt="' + esc(product.name) + ' — VIVO FRESH @ UGANDA" ' +
-            'loading="lazy" decoding="async" ' +
+            'width="400" height="400" loading="lazy" decoding="async" ' +
             'onerror="this.parentNode.classList.add(\'is-fallback\');this.remove();">' +
             '<span class="media-fallback">' + esc(product.name) + '</span>' +
             '<span class="pcard__tag">' + esc(product.category) + '</span>' +
-            '</div>' +
+            '</a>' +
             '<div class="pcard__body">' +
-            '<h3 class="pcard__name">' + esc(product.name) + '</h3>' +
+            '<h3 class="pcard__name"><a class="pcard__link" href="product.html?id=' + encodeURIComponent(product.id) + '">' + esc(product.name) + '</a></h3>' +
             '<p class="pcard__unit">' + VIVO.unitLabel(product) + '</p>' +
             note +
             '<div class="pcard__foot">' +
@@ -74,7 +74,7 @@
         featuredGrid.innerHTML = FEATURED
             .map(VIVO.getProduct)
             .filter(Boolean)
-                        .map(VIVO.renderProductCard)
+            .map(VIVO.renderProductCard)
             .join('');
         /* Cards carry .reveal (opacity 0 until observed); dynamically added cards must be shown
            explicitly or the whole strip looks like a blank white block. */
@@ -89,7 +89,7 @@
         });
         return hit ? '<img class="cattile__img" src="' + esc(hit.image) + '" alt="" loading="lazy" decoding="async">' : '';
     }
-        document.querySelectorAll('[data-photo-cat]').forEach(function (el) {
+    document.querySelectorAll('[data-photo-cat]').forEach(function (el) {
         el.insertAdjacentHTML('afterbegin', tilePhoto(el.getAttribute('data-photo-cat')));
     });
     const categoryGrid = document.getElementById('categoryGrid');
@@ -157,9 +157,9 @@
 
     const SCOPE_POOL = (function () {
         const fruits = Array.isArray(window.VIVO_FRUITS) ? window.VIVO_FRUITS : [];
-        const veg    = Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : [];
+        const veg = Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : [];
         if (SCOPE === 'fruits') return fruits;
-        if (SCOPE === 'veg')    return veg;
+        if (SCOPE === 'veg') return veg;
         return fruits.concat(veg);
     })();
 

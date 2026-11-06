@@ -27,8 +27,8 @@ Then open <http://localhost:8000>.
 npx serve .
 ```
 
-**Option C — VS Code:** install the *Live Server* extension, right-click `index.html` →
-*Open with Live Server*.
+**Option C — VS Code:** install the _Live Server_ extension, right-click `index.html` →
+_Open with Live Server_.
 
 ---
 
@@ -119,6 +119,7 @@ For products with a price range, use this shape and **never** set `price`:
 ```
 
 Range-priced items:
+
 - display as `UGX 8,000 – 52,000`
 - are **excluded** from the subtotal
 - show "Final price confirmed on WhatsApp" in the cart
@@ -251,7 +252,7 @@ Suggested vegetable categories: `Leafy Greens`, `Roots & Tubers`, `Peppers & Chi
 2. Go to <https://app.netlify.com> → **Add new site** → **Import an existing project**.
 3. Select your repository.
 4. Build settings:
-   - **Build command:** *(leave empty)*
+   - **Build command:** _(leave empty)_
    - **Publish directory:** `.`
 5. Click **Deploy**.
 
@@ -261,6 +262,7 @@ Suggested vegetable categories: `Leafy Greens`, `Roots & Tubers`, `Peppers & Chi
 `vivo-fresh` folder onto the page.
 
 ### Also works on
+
 - **GitHub Pages** — push to a repo, Settings → Pages → deploy from branch root.
 - **Cloudflare Pages** — connect the repo, framework preset "None", output directory `/`.
 
@@ -310,20 +312,20 @@ popup blocker or the customer prefers to paste the message manually.
 
 These items are deliberately **not invented** on the site. Please confirm before launch:
 
-| # | Item | Why it matters |
-|---|------|----------------|
-| 1 | **Units for range-priced products** — Local Lemon, Small Bananas, Peaches, Plums, Pawpaw are currently shown as "per unit" | The unit affects how customers read the price range |
-| 2 | **What the price range for Peaches (8,000–52,000) and Plums (5,000–30,000) represents** — weight? box size? grade? | Customers need to understand what they are comparing |
-| 3 | **Delivery fee structure** — flat rate, by zone, by order value? | Needed before any fee can be shown |
-| 4 | **Estimated delivery timeframes** per area | Currently confirmed per order only |
-| 5 | **Approved Vision / Mission / Goals wording** | Current text is clearly-marked draft placeholder |
-| 6 | **Social media URLs** (Facebook, Instagram, TikTok, X, YouTube) | Currently placeholders in the footer |
-| 7 | ~~Second WhatsApp number~~ | Resolved: owner confirmed one number only (+256 788 733 850) |
-| 8 | **Preferred contact email confirmation** — is `amongivivian123@gmail.com` the long-term business address? | Used for the contact form and footer |
-| 9 | **Product photography** — supply real photos for all 43 fruits | Site currently uses designed fallback tiles |
-| 10 | **Stock/seasonality flags** — should some fruits show as "out of season"? | The `available` field exists but all are `true` |
-| 11 | **Any legally required business disclosures** — trading name, registration, TIN | Not invented anywhere |
-| 12 | **Preferred domain name** | All canonical URLs currently use `vivofreshuganda.com` |
+| #   | Item                                                                                                                       | Why it matters                                               |
+| --- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
+| 1   | **Units for range-priced products** — Local Lemon, Small Bananas, Peaches, Plums, Pawpaw are currently shown as "per unit" | The unit affects how customers read the price range          |
+| 2   | **What the price range for Peaches (8,000–52,000) and Plums (5,000–30,000) represents** — weight? box size? grade?         | Customers need to understand what they are comparing         |
+| 3   | **Delivery fee structure** — flat rate, by zone, by order value?                                                           | Needed before any fee can be shown                           |
+| 4   | **Estimated delivery timeframes** per area                                                                                 | Currently confirmed per order only                           |
+| 5   | **Approved Vision / Mission / Goals wording**                                                                              | Current text is clearly-marked draft placeholder             |
+| 6   | **Social media URLs** (Facebook, Instagram, TikTok, X, YouTube)                                                            | Currently placeholders in the footer                         |
+| 7   | ~~Second WhatsApp number~~                                                                                                 | Resolved: owner confirmed one number only (+256 788 733 850) |
+| 8   | **Preferred contact email confirmation** — is `amongivivian123@gmail.com` the long-term business address?                  | Used for the contact form and footer                         |
+| 9   | **Product photography** — supply real photos for all 43 fruits                                                             | Site currently uses designed fallback tiles                  |
+| 10  | **Stock/seasonality flags** — should some fruits show as "out of season"?                                                  | The `available` field exists but all are `true`              |
+| 11  | **Any legally required business disclosures** — trading name, registration, TIN                                            | Not invented anywhere                                        |
+| 12  | **Preferred domain name**                                                                                                  | All canonical URLs currently use `vivofreshuganda.com`       |
 
 ---
 
@@ -340,8 +342,7 @@ These items are deliberately **not invented** on the site. Please confirm before
 
 ---
 
-© VIVO FRESH @ UGANDA. Built as a static commercial website.
----
+## © VIVO FRESH @ UGANDA. Built as a static commercial website.
 
 ## Enabling the contact form (Web3Forms — when you have the access key)
 

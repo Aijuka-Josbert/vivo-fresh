@@ -118,24 +118,25 @@
                                     <div class="field">
                                         <label for="fullName">Full name
                                             <span class="req" aria-hidden="true">*</span></label>
-                                        <input id="fullName" name="fullName" type="text" autocomplete="name" required
-                                            maxlength="25" placeholder="e.g. johnson" />
+                                        <input id="fullName" data-min="2" name="fullName" type="text"
+                                            autocomplete="name" required maxlength="25" placeholder="e.g. johnson" />
                                         <p class="field__error" data-error-for="fullName" aria-live="polite"></p>
                                     </div>
 
                                     <div class="field">
                                         <label for="phone">WhatsApp / contact number
                                             <span class="req" aria-hidden="true">*</span></label>
-                                        <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel"
-                                            required maxlength="15" placeholder="e.g. 07XX XXX XXX" />
+                                        <input id="phone" data-min="9" name="phone" type="tel" inputmode="tel"
+                                            autocomplete="tel" required maxlength="15"
+                                            placeholder="e.g. 07XX XXX XXX" />
                                         <p class="field__error" data-error-for="phone" aria-live="polite"></p>
                                     </div>
 
                                     <div class="field field--full">
                                         <label for="location">Delivery location
                                             <span class="req" aria-hidden="true">*</span></label>
-                                        <input id="location" name="location" type="text" autocomplete="address-level2"
-                                            required maxlength="100"
+                                        <input id="location" data-min="3" name="location" type="text"
+                                            autocomplete="address-level2" required maxlength="100"
                                             placeholder="e.g. Ntinda, Kampala / Gulu / Mbarara" />
                                         <p class="field__error" data-error-for="location" aria-live="polite"></p>
                                     </div>
@@ -200,7 +201,8 @@
                 <h3>Get in touch</h3>
                 <ul>
                     <li>
-                        <a href="https://wa.me/256788733850" target="_blank" rel="noopener">WhatsApp · +256 788 733
+                        <a href="https://wa.me/256788733850" target="_blank" rel="noopener noreferrer">WhatsApp · +256
+                            788 733
                             850</a>
                     </li>
                     <li><a href="tel:+256788733850">Call · +256 788 733 850</a></li>

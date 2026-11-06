@@ -121,7 +121,7 @@
         window.addEventListener('scroll', onScroll, { passive: true });
     }
 
-       /* ---------- Mobile navigation ---------- */
+    /* ---------- Mobile navigation ---------- */
     const navToggle = document.getElementById('navToggle');
     const body = document.body;
     if (navToggle) {
@@ -210,5 +210,30 @@
     document.querySelectorAll('[data-catalog-count]').forEach(function (el) {
         var k = el.getAttribute('data-catalog-count');
         if (n[k]) el.textContent = n[k];
+    });
+})();
+
+
+/* ---------- Live character counters: "7 / 25 · min 2" on every form field with a maxlength ---------- */
+(function () {
+    'use strict';
+    document.querySelectorAll('form input[maxlength], form textarea[maxlength]').forEach(function (el) {
+        if (['hidden', 'checkbox', 'radio', 'submit'].indexOf(el.type) !== -1 || el.closest('.hp')) return;
+        const max = Number(el.getAttribute('maxlength'));
+        const min = Number(el.getAttribute('data-min')) || 0;
+        const out = document.createElement('p');
+        out.className = 'charcount';
+        el.insertAdjacentElement('afterend', out);
+        function update() {
+            const n = el.value.length;
+            out.textContent = n + ' / ' + max + (min ? ' characters · min ' + min : ' characters');
+            out.classList.toggle('is-short', min > 0 && n > 0 && n < min);
+            out.classList.toggle('is-ok', n >= min && n > 0 && n < max * 0.9);
+            out.classList.toggle('is-near', n >= max * 0.9);
+        }
+        el.addEventListener('input', update);
+        el.addEventListener('reset', update);
+        el.form && el.form.addEventListener('reset', function () { setTimeout(update, 0); });
+        update();
     });
 })();

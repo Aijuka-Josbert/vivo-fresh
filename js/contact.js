@@ -14,6 +14,7 @@
   const statusEl = document.getElementById('contactStatus');
   const submitBtn = form.querySelector('[type="submit"]');
   const CFG = VIVO.config.email;
+  const loadedAt = Date.now();
 
   const rules = {
     contactName: function (v) {
@@ -85,6 +86,20 @@
     const invalid = validate();
     if (invalid) { invalid.focus(); return; }
 
+    /* Basic bot/spam protection: honeypot, too-fast submit, and a short cool-down between sends */
+    if (form.elements.botcheck && form.elements.botcheck.value) { form.reset(); return; }
+    if (Date.now() - loadedAt < 2500) {
+      showStatus('error', '<strong>One moment.</strong><p>Please re-read your message, then press Send again.</p>');
+      return;
+    }
+    try {
+      const last = Number(localStorage.getItem('vivo_contact_last') || 0);
+      if (Date.now() - last < 30000) {
+        showStatus('error', '<strong>Message already sent.</strong><p>Please wait a few seconds before sending another one.</p>');
+        return;
+      }
+    } catch (err) { /* storage blocked: skip cool-down */ }
+
     const url = endpoint();
     if (!url) {
       showStatus('error',
@@ -126,6 +141,7 @@
       .then(function (result) {
         if (!result.ok) throw new Error('Request failed');
         form.reset();
+        try { localStorage.setItem('vivo_contact_last', String(Date.now())); } catch (err) { /* ignore */ }
         showStatus('success',
           '<strong>Thank you — your message has been sent.</strong>' +
           '<p>We will reply to you as soon as we can. For urgent orders, message us on WhatsApp.</p>'
