@@ -74,8 +74,11 @@
         featuredGrid.innerHTML = FEATURED
             .map(VIVO.getProduct)
             .filter(Boolean)
-            .map(VIVO.renderProductCard)
+                        .map(VIVO.renderProductCard)
             .join('');
+        /* Cards carry .reveal (opacity 0 until observed); dynamically added cards must be shown
+           explicitly or the whole strip looks like a blank white block. */
+        featuredGrid.querySelectorAll('.reveal').forEach(function (c) { c.classList.add('is-in'); });
     }
 
     /* ---------- Homepage category tiles ---------- */
@@ -86,6 +89,9 @@
         });
         return hit ? '<img class="cattile__img" src="' + esc(hit.image) + '" alt="" loading="lazy" decoding="async">' : '';
     }
+        document.querySelectorAll('[data-photo-cat]').forEach(function (el) {
+        el.insertAdjacentHTML('afterbegin', tilePhoto(el.getAttribute('data-photo-cat')));
+    });
     const categoryGrid = document.getElementById('categoryGrid');
     if (categoryGrid) {
         /* Homepage shows fruit categories only — veg has its own page */
@@ -224,7 +230,7 @@
     if (toolbarEl) {
         clearFilters = document.createElement('button');
         clearFilters.type = 'button';
-        clearFilters.className = 'toolbar__clear';
+        clearFilters.className = 'toolbar__reset';
         clearFilters.textContent = 'Clear filters';
         clearFilters.hidden = true;
         toolbarEl.appendChild(clearFilters);

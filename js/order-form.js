@@ -108,11 +108,12 @@
         const message = buildMessage();
         const url = VIVO.whatsapp.open(message);
         sessionStorage.setItem('vivo_wa_drafted', 'true');
+        sessionStorage.setItem('vivo_wa_pending', 'true');   /* cart is cleared when they leave for WhatsApp */
 
         // 1. Show the status message
         showStatus('info',
             '<strong>WhatsApp has opened in a new tab.</strong>' +
-            '<p>Please press <strong>Send</strong> in the WhatsApp app to deliver your order to us. We will then confirm availability, final prices and delivery.</p>' +
+            '<p>Press <strong>Send</strong> in WhatsApp to deliver your order. Your basket clears once you leave this page, so it can&rsquo;t be sent twice.</p>' +
             '<p class="form-status__small">If WhatsApp did not open, use <strong>Copy order message</strong> and send it manually.</p>'
         );
 

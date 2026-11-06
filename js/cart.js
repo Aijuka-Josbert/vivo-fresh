@@ -339,3 +339,45 @@
   VIVO.cart.onChange(render);
   render();
 })();
+
+/* ============================================================
+   ORDER SENT -> CART CLEARED (prevents accidental double texting)
+   Flow: order-form.js flags 'vivo_wa_pending' when WhatsApp is opened. The moment the
+   customer leaves this page/tab, the cart is emptied. A snapshot is kept so that, if
+   WhatsApp never opened, they can restore it deliberately (cart page).
+   ============================================================ */
+(function () {
+  'use strict';
+  const VIVO = window.VIVO;
+  if (!VIVO || !VIVO.cart) return;
+
+  function finalizeSent() {
+    if (!sessionStorage.getItem('vivo_wa_pending')) return;
+    sessionStorage.removeItem('vivo_wa_pending');
+    try { localStorage.setItem('vivo_last_order', JSON.stringify(VIVO.cart.get())); } catch (e) { /* storage blocked */ }
+    VIVO.cart.clear();
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') finalizeSent();
+  });
+  window.addEventListener('pagehide', finalizeSent);
+
+  const emptyEl = document.getElementById('cartEmpty');
+  if (!emptyEl) return;
+  let snapshot = [];
+  try { snapshot = JSON.parse(localStorage.getItem('vivo_last_order') || '[]'); } catch (e) { snapshot = []; }
+  snapshot = snapshot.filter(function (i) { return i && VIVO.getProduct(i.id); });
+  if (!snapshot.length) return;
+
+  const box = document.createElement('div');
+  box.className = 'sentbox';
+  box.innerHTML = '<strong>Order sent to WhatsApp ✓</strong>' +
+    '<p>We cleared your basket so it cannot be sent twice. WhatsApp did not open? Restore it and try again.</p>' +
+    '<button type="button" class="btn btn--ghost btn--sm" id="restoreOrderBtn">Restore my last order</button>';
+  emptyEl.appendChild(box);
+  box.querySelector('#restoreOrderBtn').addEventListener('click', function () {
+    snapshot.forEach(function (i) { VIVO.cart.add(i.id, i.qty); });
+    localStorage.removeItem('vivo_last_order');
+    box.remove();
+  });
+})();

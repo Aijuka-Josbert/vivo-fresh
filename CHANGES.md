@@ -34,3 +34,12 @@ Owner decisions applied: second number (+256 755 554 669) removed, one WhatsApp 
 - Check every product name/unit/price against the approved catalogue (never copy competitor prices).
 - Genuine photos, testimonials, offers/packages: none added (none supplied).
 - products.html <title>/meta still say 43 (static meta).
+
+## Round 3 (after owner feedback + screenshots)
+- FIXED blank white block on the homepage "Fresh favourites": cards carried `.reveal` (opacity 0) and were never shown. js/products.js now marks them visible.
+- Foodier homepage: photo food cards (fruits / vegetables / meat) with real product photos, a coral-to-gold scrolling flavour ribbon, emoji section titles, warmer tinted bands, shorter copy throughout (hero, intro, why, steps, delivery, CTA).
+- WhatsApp double-text protection: when the order is sent to WhatsApp, the basket is cleared the moment the customer leaves the page/tab (visibilitychange/pagehide). A snapshot is kept so the empty cart shows "Order sent ✓ — Restore my last order" if WhatsApp never opened. (js/order-form.js, js/cart.js)
+- Filter panel redesigned as one card: search + sort on top, chips below (swipeable on phones), result count + coral "Clear filters" at the bottom. Fixed a CSS class clash that squashed the Clear button (`.toolbar__reset`).
+- About page: photo slot. Save a landscape image as `assets/images/about-photo.jpg` (about 1600x900); until then `assets/images/about-placeholder.svg` is shown.
+- Call button (tel:+256788733850, same number) on the contact page, homepage CTA and footers.
+- Tests (jsdom, simulated browser): featured strip visible, 3 photo cards, ribbon, cart clears on leaving only when a send was flagged, restore works, about slot, toolbar parts. All pass. No real browser was available here, so the LOOK (spacing, ribbon animation, mobile layout) is untested; please check on your phone.

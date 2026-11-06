@@ -327,7 +327,6 @@
   }
 }
 
-
 /* ============================================================
    UX PASS — sort, price note, order bar, vegetable tiles, mobile
    ============================================================ */
@@ -381,63 +380,440 @@
   text-decoration: none;
   font-size: 0.9rem;
 }
-.orderbar[hidden] { display: none; }
-.orderbar strong { color: var(--gold-soft); white-space: nowrap; }
-.summary__clear { margin-top: 0.5rem; }
-body { padding-bottom: 4.5rem; }
-.chip, .pcard__add, .stepper__btn, .citem__remove { min-height: 44px; }
-.stepper__btn { min-width: 44px; }
+.orderbar[hidden] {
+  display: none;
+}
+.orderbar strong {
+  color: var(--gold-soft);
+  white-space: nowrap;
+}
+.summary__clear {
+  margin-top: 0.5rem;
+}
+body {
+  padding-bottom: 4.5rem;
+}
+.chip,
+.pcard__add,
+.stepper__btn,
+.citem__remove {
+  min-height: 44px;
+}
+.stepper__btn {
+  min-width: 44px;
+}
 
 @media (max-width: 480px) {
   /* Two compact columns instead of one very long list (320px-safe) */
-  .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
-  .pcard__name { font-size: 0.95rem; }
-  .pcard__foot { flex-wrap: wrap; gap: 0.5rem; }
-  .pcard__add { flex: 1 1 100%; }
+  .pgrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+  .pcard__name {
+    font-size: 0.95rem;
+  }
+  .pcard__foot {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .pcard__add {
+    flex: 1 1 100%;
+  }
   /* Category chips become one swipeable row instead of a tall wrapped block */
-  .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 0.4rem; scrollbar-width: thin; }
-  .chip { white-space: nowrap; }
-  .toolbar__sort { justify-content: space-between; }
-  .orderbar { font-size: 0.82rem; padding: 0.75rem 1rem; }
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.4rem;
+    scrollbar-width: thin;
+  }
+  .chip {
+    white-space: nowrap;
+  }
+  .toolbar__sort {
+    justify-content: space-between;
+  }
+  .orderbar {
+    font-size: 0.82rem;
+    padding: 0.75rem 1rem;
+  }
 }
 @media (max-width: 360px) {
-  .pcard__body { padding: 0.7rem; }
-  .pcard__price { font-size: 0.92rem; }
+  .pcard__body {
+    padding: 0.7rem;
+  }
+  .pcard__price {
+    font-size: 0.92rem;
+  }
 }
-
 
 /* ============================================================
    SHOP-FIRST POLISH — photo category tiles, scannable cards, order bar
    ============================================================ */
 .cattile__img {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; z-index: -2;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
   transition: transform 0.7s var(--ease);
 }
-.cattile:hover .cattile__img { transform: scale(1.06); }
-.cattile::after {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(180deg, rgba(28,64,48,0) 25%, rgba(28,64,48,0.88) 100%);
+.cattile:hover .cattile__img {
+  transform: scale(1.06);
 }
-.cattile__name { text-shadow: 0 1px 8px rgba(0,0,0,0.35); }
+.cattile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 64, 48, 0) 25%,
+    rgba(28, 64, 48, 0.88) 100%
+  );
+}
+.cattile__name {
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.35);
+}
 
 /* Product names and prices are read fast: sans-serif, not decorative serif */
-.pcard__name { font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.005em; }
-.pcard__price { font-family: var(--font-sans); font-weight: 700; }
-.pcard { display: flex; flex-direction: column; height: 100%; }
-.pcard__body { display: flex; flex-direction: column; flex: 1; }
-.pcard__foot { margin-top: auto; }
+.pcard__name {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.pcard__price {
+  font-family: var(--font-sans);
+  font-weight: 700;
+}
+.pcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.pcard__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.pcard__foot {
+  margin-top: auto;
+}
 
-.orderbar span { display: flex; flex-direction: column; line-height: 1.25; }
-.orderbar small { color: rgba(255,255,255,0.8); font-size: 0.78rem; }
-.toolbar__clear {
-  min-height: 44px; padding: 0.45rem 1rem; border: 1px solid var(--line-strong);
-  border-radius: 999px; background: transparent; color: var(--green); font: inherit; font-weight: 600; cursor: pointer;
+.orderbar span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
 }
-.toolbar__clear[hidden] { display: none; }
-#categories { scroll-margin-top: calc(var(--header-h, 72px) + 1rem); }
-:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.orderbar small {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.78rem;
+}
+#categories {
+  scroll-margin-top: calc(var(--header-h, 72px) + 1rem);
+}
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 2px;
+}
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
-@media (max-width: 480px) { .cattile { min-height: 132px; padding: 0.8rem; } }
+@media (max-width: 480px) {
+  .cattile {
+    min-height: 132px;
+    padding: 0.8rem;
+  }
+}
+
+/* ============================================================
+   FOODIE PASS — photo food cards, flavour ribbon, filter panel, photo slot
+   ============================================================ */
+.foodcards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.foodcard {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 190px;
+  padding: 1.1rem 1.2rem;
+  border-radius: var(--radius);
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(150deg, #4e8f6b, #285943 60%, #1c4030);
+  box-shadow: 0 10px 28px rgba(28, 64, 48, 0.18);
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.foodcard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(28, 64, 48, 0.26);
+}
+.foodcard .cattile__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.foodcard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(28, 64, 48, 0) 20%,
+    rgba(28, 64, 48, 0.9) 100%
+  );
+}
+.foodcard__emoji {
+  position: absolute;
+  top: 0.8rem;
+  left: 1rem;
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+.foodcard__title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.foodcard__sub {
+  font-size: 0.88rem;
+  opacity: 0.9;
+}
+
+.valuegrid {
+  align-items: start;
+}
+
+.ribbon {
+  align-self: start;
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+  margin-top: 0;
+  padding: 0.75rem 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    100deg,
+    var(--coral),
+    var(--gold)
+  );
+  color: #fff;
+  font-size: clamp(0.82rem, 0.72rem + 0.15vw, 0.98rem);
+  font-weight: 500;
+  line-height: 1.25;
+  box-shadow: 0 8px 20px rgba(28, 64, 48, 0.1);
+}
+
+.ribbon__track {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.1rem, 2vw, 2rem);
+  width: max-content;
+  padding-left: clamp(1.1rem, 2vw, 2rem);
+  animation: ribbon 42s linear infinite;
+}
+
+.ribbon__track span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  white-space: nowrap;
+}
+.ribbon__emoji {
+  font-size: 1.05em;
+  line-height: 1;
+}
+
+@media (max-width: 700px) {
+  .ribbon__emoji {
+    font-size: 0.95em;
+  }
+}
+@keyframes ribbon {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ribbon__track {
+    animation: none;
+  }
+  .ribbon {
+    overflow-x: auto;
+  }
+}
+@media (max-width: 700px) {
+  .ribbon {
+    padding: 0.5rem 0;
+    font-size: 0.76rem;
+  }
+
+  .ribbon__track {
+    gap: 1rem;
+    padding-left: 1rem;
+  }
+
+  .ribbon__track span {
+    gap: 0.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .ribbon {
+    margin-top: 0.8rem;
+    padding: 0.45rem 0;
+    font-size: 0.78rem;
+  }
+
+  .ribbon__track {
+    gap: 1.1rem;
+    padding-left: 1.1rem;
+  }
+}
+/* Fresh favourites strip: warm tinted band so it never reads as an empty white block */
+#featuredGrid {
+  min-height: 120px;
+}
+.section--cream {
+  background: linear-gradient(180deg, #fff1dc 0%, #fff5e8 100%);
+}
+
+/* Filter panel (search + sort + chips + count) */
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas: "search sort" "chips chips" "count reset";
+  gap: 0.9rem 1rem;
+  align-items: center;
+  padding: 1.1rem 1.2rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(28, 64, 48, 0.08);
+}
+.toolbar__search {
+  grid-area: search;
+  min-height: 48px;
+}
+.toolbar__sort {
+  grid-area: sort;
+}
+.toolbar .chips {
+  grid-area: chips;
+  padding-top: 0.9rem;
+  border-top: 1px dashed var(--line-strong);
+}
+.toolbar__count {
+  grid-area: count;
+  margin: 0;
+  font-weight: 500;
+  color: var(--green);
+}
+.toolbar__reset {
+  grid-area: reset;
+  justify-self: end;
+  min-height: 40px;
+  padding: 0.4rem 1rem;
+  border: 1.5px solid var(--coral);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--coral);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.toolbar__reset:hover {
+  background: var(--coral);
+  color: #fff;
+}
+.toolbar__reset[hidden] {
+  display: none;
+}
+.chip {
+  background: #fff8ee;
+}
+.chip[aria-pressed="true"] {
+  box-shadow: 0 6px 16px rgba(40, 89, 67, 0.28);
+}
+
+/* About photo slot */
+.photo-slot {
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(28, 64, 48, 0.15);
+  aspect-ratio: 16 / 9;
+  background: #fff1dc;
+}
+.photo-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* "Order sent" notice on the empty cart */
+.sentbox {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  background: rgba(40, 89, 67, 0.08);
+  border: 1px solid rgba(40, 89, 67, 0.25);
+  text-align: left;
+}
+.sentbox p {
+  margin: 0.35rem 0 0.8rem;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 720px) {
+  .foodcards {
+    grid-template-columns: 1fr;
+  }
+  .foodcard {
+    min-height: 120px;
+  }
+  .foodcard__title {
+    font-size: 1.35rem;
+  }
+  .toolbar {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "search search" "sort sort" "chips chips" "count reset";
+    padding: 0.9rem;
+  }
+  .toolbar .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin-inline: -0.2rem;
+    padding-inline: 0.2rem;
+    padding-bottom: 0.3rem;
+  }
+  .toolbar .chips::-webkit-scrollbar {
+    display: none;
+  }
+  .chip {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+}
