@@ -1,0 +1,58 @@
+# Namecheap shared hosting (cPanel / Apache). Copy this file to public_html/.htaccess
+# Needs mod_rewrite, mod_headers, mod_expires, mod_deflate (all standard on cPanel).
+
+Options -Indexes
+ErrorDocument 404 /404.html
+
+# --- Always HTTPS (turn on the free AutoSSL in cPanel first) ---
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# --- Security headers ---
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://api.web3forms.com https://formspree.io; form-action 'self' https://api.web3forms.com https://formspree.io; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=()"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+</IfModule>
+
+# --- Never serve hidden files or project/config files ---
+<FilesMatch "^\.(?!well-known)">
+  Require all denied
+</FilesMatch>
+<FilesMatch "\.(md|toml|log|bak|sql|ini|sh|map)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^_headers$">
+  Require all denied
+</FilesMatch>
+
+# --- Correct types ---
+AddType font/woff2 .woff2
+AddType image/avif .avif
+AddType image/webp .webp
+
+# --- Compression ---
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml application/xml
+</IfModule>
+
+# --- Caching (same policy as netlify.toml) ---
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/javascript "access plus 1 hour"
+  ExpiresByType image/jpeg "access plus 7 days"
+  ExpiresByType image/png "access plus 7 days"
+  ExpiresByType image/webp "access plus 7 days"
+  ExpiresByType image/avif "access plus 7 days"
+  ExpiresByType image/svg+xml "access plus 7 days"
+  ExpiresByType font/woff2 "access plus 7 days"
+</IfModule>

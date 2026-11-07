@@ -31,6 +31,8 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="preload" href="assets/fonts/bootstrap-icons-subset.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="css/icons.css" />
     <link rel="stylesheet" href="css/responsive.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <script>
@@ -88,7 +90,7 @@
                     <li><a class="nav__link" href="products.html">Fruits</a></li>
                     <li><a class="nav__link" href="vegetables.html">Vegetables</a></li>
                     <li>
-                        <a class="nav__link" href="vegetables.html?category=Meat">Meat</a>
+                        <a class="nav__link" href="meat.html">Meat</a>
                     </li>
                     <li><a class="nav__link" href="about.html">About Us</a></li>
                     <li><a class="nav__link" href="delivery.html">Delivery</a></li>
@@ -144,34 +146,22 @@
                     </ul>
                 </div>
 
-                <div class="hero__art">
-                    <div class="hero__arch" data-media data-tone="exotic">
-                        <img src="assets/images/fruits/dragon-fruit.avif"
-                            alt="Fresh dragon fruit from VIVO FRESH @ UGANDA" width="440" height="550" onerror="
-                  this.parentNode.classList.add('is-fallback');
-                  this.remove();
-                " />
-                        <span class="media-fallback">Dragon Fruit</span>
-                    </div>
-                    <div class="hero__chip hero__chip--a" data-media data-tone="berries">
-                        <img src="assets/images/fruits/strawberrie.avif" alt="Fresh strawberries" width="128"
-                            height="128" onerror="
-                  this.parentNode.classList.add('is-fallback');
-                  this.remove();
-                " />
-                        <span class="media-fallback">Strawberries</span>
-                    </div>
-                    <div class="hero__chip hero__chip--b" data-media data-tone="tropical">
-                        <img src="assets/images/fruits/mangoes.avif" alt="Fresh mangoes" width="128" height="128"
-                            onerror="
-                  this.parentNode.classList.add('is-fallback');
-                  this.remove();
-                " />
-                        <span class="media-fallback">Mangoes</span>
-                    </div>
-                    <div class="hero__badge">
-                        <span class="hero__badge-num" data-catalog-count="all">131</span>
-                        <span class="hero__badge-txt">fresh products</span>
+                <div class="hero__art hero__art--girl">
+                    <!-- HERO PHOTO: save your picture as assets/images/hero-girl.webp (transparent background,
+                         about 1000x1200, under 200 KB). Until that file exists, the placeholder is shown. -->
+                    <div class="herogirl">
+                        <span class="herogirl__blob herogirl__blob--gold" aria-hidden="true"></span>
+                        <span class="herogirl__blob herogirl__blob--coral" aria-hidden="true"></span>
+                        <span class="herogirl__blob herogirl__blob--green" aria-hidden="true"></span>
+                        <!-- fill in here -->
+                        <img class="herogirl__img" src="./assets/images/hero-girl.jpg"
+                            alt="A smiling VIVO FRESH shopper surrounded by fresh fruits and vegetables"
+                            width="1000" height="1200" fetchpriority="high" decoding="async"
+                            onerror="this.onerror=null;this.src='assets/images/hero-girl-placeholder.svg';this.parentNode.classList.add('is-placeholder');">
+                        <div class="hero__badge">
+                            <span class="hero__badge-num" data-catalog-count="all">131</span>
+                            <span class="hero__badge-txt">fresh products</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -183,18 +173,18 @@
                 <div class="foodstrip">
                     <div class="foodcards">
                         <a class="foodcard" href="products.html" data-photo-cat="Tropical Fruits" data-tone="exotic">
-                            <span class="foodcard__emoji" aria-hidden="true">🍍</span>
+                            <span class="foodcard__emoji" aria-hidden="true"><i class="bi bi-apple" aria-hidden="true"></i></span>
                             <span class="foodcard__title">Fruits</span>
                             <span class="foodcard__sub">Sweet, juicy, tropical</span>
                         </a>
                         <a class="foodcard" href="vegetables.html" data-photo-cat="Leafy Greens" data-tone="everyday">
-                            <span class="foodcard__emoji" aria-hidden="true">🥬</span>
+                            <span class="foodcard__emoji" aria-hidden="true"><i class="bi bi-leaf-fill" aria-hidden="true"></i></span>
                             <span class="foodcard__title">Vegetables</span>
                             <span class="foodcard__sub">Crisp, green, market-fresh</span>
                         </a>
-                        <a class="foodcard" href="vegetables.html?category=Meat" data-photo-cat="Meat"
+                        <a class="foodcard" href="meat.html" data-photo-cat="Meat"
                             data-tone="berries">
-                            <span class="foodcard__emoji" aria-hidden="true">🥩</span>
+                            <span class="foodcard__emoji" aria-hidden="true"><i class="bi bi-fire" aria-hidden="true"></i></span>
                             <span class="foodcard__title">Meat</span>
                             <span class="foodcard__sub">Fresh cuts, ready to cook</span>
                         </a>
@@ -243,7 +233,7 @@
                 <header class="section__head">
                     <div>
                         <p class="eyebrow">From the market</p>
-                        <h2 class="h2">Fresh favourites 🍓</h2>
+                        <h2 class="h2">Fresh favourites <i class="bi bi-heart-fill title-icon" aria-hidden="true"></i></h2>
                     </div>
                     <a class="link-arrow" href="products.html">View all <span data-catalog-count="all">131</span>
                         products →</a>
@@ -276,8 +266,8 @@
                         </span>
                         <span class="sector-switch__text">
                             <span class="sector-switch__eyebrow">More from the market</span>
-                            <span class="sector-switch__title">Vegetables, spices &amp; meat →</span>
-                            <span class="sector-switch__sub"><span data-catalog-count="veg">88</span> more products, all
+                            <span class="sector-switch__title">Vegetables &amp; spices →</span>
+                            <span class="sector-switch__sub"><span data-catalog-count="veg">83</span> more products, all
                                 delivered across Uganda</span>
                         </span>
                     </a>
@@ -291,7 +281,7 @@
                 <header class="section__head">
                     <div>
                         <p class="eyebrow">Why shop with us</p>
-                        <h2 class="h2">Why VIVO 🥭</h2>
+                        <h2 class="h2">Why VIVO <i class="bi bi-stars title-icon" aria-hidden="true"></i></h2>
                     </div>
                 </header>
                 <div class="valuegrid">
@@ -310,7 +300,8 @@
                         </h3>
                         <p class="value__text">
                             <span data-catalog-count="fruits">43</span> fruits ·
-                            <span data-catalog-count="veg">88</span> veg, spices &amp; meat.
+                            <span data-catalog-count="veg">83</span> veg &amp; spices ·
+                            <span data-catalog-count="meat">5</span> meats.
                             Mix them all in one order.
                         </p>
                     </article>
@@ -403,7 +394,7 @@
                         <a class="btn btn--ghost" href="#" data-wa="general"
                             style="border-color: rgba(255, 255, 255, 0.6); color: #fff">Chat on WhatsApp</a>
                         <a class="btn btn--ghost" href="tel:+256788733850"
-                            style="border-color: rgba(255, 255, 255, 0.6); color: #fff">📞 Call us</a>
+                            style="border-color: rgba(255, 255, 255, 0.6); color: #fff"><i class="bi bi-telephone-fill" aria-hidden="true"></i> Call us</a>
                     </div>
                 </div>
             </div>
@@ -440,7 +431,7 @@
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="products.html">Fresh Fruits</a></li>
                     <li><a href="vegetables.html">Vegetables</a></li>
-                    <li><a href="vegetables.html?category=Meat">Meat</a></li>
+                    <li><a href="meat.html">Meat</a></li>
                     <li><a href="cart.html">Your Order</a></li>
                     <li><a href="delivery.html">Delivery Information</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
@@ -483,6 +474,7 @@
     <script src="js/config.js"></script>
     <script src="js/data/fruits.js"></script>
     <script src="js/data/vegetables.js"></script>
+    <script src="js/data/meat.js"></script>
     <script src="js/main.js"></script>
     <script src="js/whatsapp.js"></script>
     <script src="js/cart.js"></script>

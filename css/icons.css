@@ -1,0 +1,36 @@
+/* Bootstrap Icons 1.13.1 (MIT) — subset bundled locally: only the icons this site uses.
+   Add a new icon: re-subset assets/fonts/bootstrap-icons-subset.woff2 and add its class below. */
+@font-face {
+  font-family: "bootstrap-icons";
+  src: url("../assets/fonts/bootstrap-icons-subset.woff2") format("woff2");
+  font-display: swap;
+}
+.bi { display: inline-block; font-family: "bootstrap-icons" !important; font-style: normal; font-weight: normal !important; font-variant: normal; line-height: 1; vertical-align: -0.125em; -webkit-font-smoothing: antialiased; }
+.bi::before { display: inline-block; font-family: "bootstrap-icons" !important; }
+.bi-apple::before { content: "\f65b"; }
+.bi-leaf-fill::before { content: "\f90b"; }
+.bi-fire::before { content: "\f7f6"; }
+.bi-lightning-charge-fill::before { content: "\f46c"; }
+.bi-heart-fill::before { content: "\f415"; }
+.bi-tree-fill::before { content: "\f5e1"; }
+.bi-droplet-fill::before { content: "\f30b"; }
+.bi-sun-fill::before { content: "\f5a1"; }
+.bi-flower2::before { content: "\f3ce"; }
+.bi-star-fill::before { content: "\f586"; }
+.bi-stars::before { content: "\f589"; }
+.bi-telephone-fill::before { content: "\f5b4"; }
+.bi-whatsapp::before { content: "\f618"; }
+.bi-basket2-fill::before { content: "\f181"; }
+.bi-emoji-smile::before { content: "\f327"; }
+.bi-emoji-frown::before { content: "\f31d"; }
+.bi-geo-alt-fill::before { content: "\f3e7"; }
+.bi-truck::before { content: "\f5ea"; }
+.bi-bag-check::before { content: "\f171"; }
+.bi-shield-check::before { content: "\f52f"; }
+.bi-cash-coin::before { content: "\f632"; }
+.bi-chat-dots-fill::before { content: "\f249"; }
+.bi-check-circle-fill::before { content: "\f26a"; }
+.bi-x-circle-fill::before { content: "\f622"; }
+.bi-exclamation-triangle-fill::before { content: "\f33a"; }
+.bi-lock-fill::before { content: "\f47a"; }
+.bi-camera-fill::before { content: "\f219"; }

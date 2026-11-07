@@ -26,8 +26,10 @@
     return;
   }
 
+  const isMeat = (window.VIVO_MEAT || []).some(function (p) { return p.id === product.id; });
   const isVeg = (window.VIVO_VEGETABLES || []).some(function (p) { return p.id === product.id; });
-  const dept = isVeg ? { label: 'Vegetables, Spices & Meat', href: 'vegetables.html' } : { label: 'Fruits', href: 'products.html' };
+  const dept = isMeat ? { label: 'Meat', href: 'meat.html' }
+    : (isVeg ? { label: 'Vegetables & Spices', href: 'vegetables.html' } : { label: 'Fruits', href: 'products.html' });
   const price = VIVO.formatPrice(product);
   const tone = VIVO.toneFor(product.category);
 
@@ -41,7 +43,7 @@
   const crumbs = document.getElementById('pdCrumbs');
   if (crumbs) {
     crumbs.innerHTML = '<a href="index.html">Home</a> <span aria-hidden="true">/</span> ' +
-      '<a href="' + dept.href + '?category=' + encodeURIComponent(product.category) + '">' + esc(product.category) + '</a> ' +
+      '<a href="' + dept.href + (isMeat ? '' : '?category=' + encodeURIComponent(product.category)) + '">' + esc(isMeat ? 'Meat' : product.category) + '</a> ' +
       '<span aria-hidden="true">/</span> <span aria-current="page">' + esc(product.name) + '</span>';
   }
 
@@ -106,13 +108,15 @@
   } catch (e) { /* non-critical */ }
 
   /* You may also like: same category first, then the rest of the same department, then the other one */
-  const pool = (isVeg ? window.VIVO_VEGETABLES : window.VIVO_FRUITS) || [];
+  const pool = (isMeat ? window.VIVO_MEAT : (isVeg ? window.VIVO_VEGETABLES : window.VIVO_FRUITS)) || [];
   const others = pool.filter(function (p) { return p.id !== product.id && p.available !== false; });
   const same = others.filter(function (p) { return p.category === product.category; });
   const rest = others.filter(function (p) { return p.category !== product.category; });
   const idx = pool.findIndex(function (p) { return p.id === product.id; });
   const rotate = function (list) { return list.filter(function (p) { return pool.indexOf(p) > idx; }).concat(list.filter(function (p) { return pool.indexOf(p) < idx; })); };
-  const picks = rotate(same).concat(rotate(rest)).slice(0, 4);
+  /* Meat has few items: top up with popular vegetables so the strip is never nearly empty */
+  const extra = isMeat ? (window.VIVO_VEGETABLES || []).slice(0, 4) : [];
+  const picks = rotate(same).concat(rotate(rest), extra).slice(0, 4);
   const grid = document.getElementById('alsoGrid');
   const sect = document.getElementById('alsoSection');
   if (grid && sect && picks.length) {

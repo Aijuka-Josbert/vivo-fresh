@@ -11,7 +11,8 @@
     /* ---------- Product registry ---------- */
     VIVO.products = [].concat(
         Array.isArray(window.VIVO_FRUITS) ? window.VIVO_FRUITS : [],
-        Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : []
+        Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : [],
+        Array.isArray(window.VIVO_MEAT) ? window.VIVO_MEAT : []
     );
 
     VIVO.getProduct = function (id) {
@@ -205,14 +206,62 @@
 /* ---------- Live catalogue counts: <span data-catalog-count="all|fruits|veg"> ---------- */
 (function () {
     'use strict';
-    var f = (window.VIVO_FRUITS || []).length, v = (window.VIVO_VEGETABLES || []).length;
-    var n = { fruits: f, veg: v, all: f + v };
+    var f = (window.VIVO_FRUITS || []).length, v = (window.VIVO_VEGETABLES || []).length, m = (window.VIVO_MEAT || []).length;
+    var n = { fruits: f, veg: v, meat: m, nonfruit: v + m, all: f + v + m };
     document.querySelectorAll('[data-catalog-count]').forEach(function (el) {
         var k = el.getAttribute('data-catalog-count');
         if (n[k]) el.textContent = n[k];
     });
 })();
 
+
+/* ============================================================
+   FORM SAFETY — blocks links / web addresses / markup in customer-typed text
+   Used by the order form, the contact form and the live field hints.
+   (Client-side only: it protects the people reading your WhatsApp/email.
+    Spam filtering on the form provider is the second layer — see README.)
+   ============================================================ */
+(function () {
+    'use strict';
+    var TLD = 'com|net|org|info|biz|xyz|top|click|link|ug|co|io|me|app|ru|cn|tk|ml|ga|cf|gq|shop|site|online|live|club|vip|icu|buzz|cc|ly|gl|gd|to|tv|ws|pw|su|cam|work|support|store|tech|website|fun|life|world|today|page|dev|cloud|email|zip|mov|bid|loan|win|download|stream|party|review|trade|date|racing|science|men|rest|kim|ooo|gle|help|space|pro|mobi|name|asia|in|us|uk|de|fr|tr|br|ir|pk|ng|ke|za|tz|rw';
+    var DOT = '(?:\\.|\\[\\.\\]|\\(\\.\\)|\\{\\.\\}|\\s+dot\\s+|\\s*\\(dot\\)\\s*)';
+    var LINK_PATTERNS = [
+        /(?:^|[^a-z])(?:https?|ftps?|file|data|javascript|vbscript|blob|mailto|whatsapp)\s*:/i,
+        /h\s*t\s*t\s*p\s*s?\s*:/i,
+        /hxxps?/i,
+        /(?:^|[\s:(])\/\/\S/,
+        /w{3}\s*(?:\.|\[\.\]|\(dot\))/i,
+        new RegExp('(?:^|[^a-z0-9])[a-z0-9][a-z0-9-]*\\s*' + DOT + '\\s*(?:' + TLD + ')(?![a-z0-9])', 'i'),
+        /\b\d{1,3}(?:\.\d{1,3}){3}\b/,
+        /\bon[a-z]{3,}\s*=/i
+    ];
+    var MSG_LINK = 'For your safety, links and web addresses are not allowed here. Please remove it.';
+    var MSG_MARKUP = 'Please remove the characters < and > (they are not allowed).';
+    var MSG_PHONE = 'Please use digits only (you may include +, spaces or dashes).';
+
+    function normalize(v) {
+        var s = String(v == null ? '' : v);
+        try { s = s.normalize('NFKC'); } catch (e) { /* old browser */ }
+        return s.replace(/[\u200B-\u200F\u202A-\u202E\u2060\uFEFF]/g, '');
+    }
+    /* returns '' when fine, otherwise {code, message} */
+    function check(value, kind) {
+        var v = normalize(value);
+        if (!v) return null;
+        if (kind === 'phone') return /^[0-9+()\-\s.]*$/.test(v) ? null : { code: 'chars', message: MSG_PHONE };
+        if (/[<>]/.test(v)) return { code: 'markup', message: MSG_MARKUP };
+        for (var i = 0; i < LINK_PATTERNS.length; i++) {
+            if (LINK_PATTERNS[i].test(v)) return { code: 'link', message: MSG_LINK };
+        }
+        return null;
+    }
+    /* last line of defence before text is placed in a WhatsApp/email message */
+    function clean(value) {
+        return normalize(value).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F<>]/g, '').replace(/[ \t]{3,}/g, '  ').trim();
+    }
+    window.VIVO = window.VIVO || {};
+    window.VIVO.safety = { check: check, clean: clean };
+})();
 
 /* ---------- Live character counters: "7 / 25 · min 2" on every form field with a maxlength ---------- */
 (function () {
@@ -226,6 +275,16 @@
         el.insertAdjacentElement('afterend', out);
         function update() {
             const n = el.value.length;
+            const kind = el.type === 'tel' ? 'phone' : 'text';
+            const bad = el.type !== 'email' && window.VIVO.safety ? window.VIVO.safety.check(el.value, kind) : null;
+            if (bad) {
+                out.textContent = bad.message;
+                out.className = 'charcount is-bad';
+                el.setAttribute('aria-invalid', 'true');
+                return;
+            }
+            out.className = 'charcount';
+            if (el.getAttribute('aria-invalid') === 'true' && !el.classList.contains('has-error')) el.removeAttribute('aria-invalid');
             out.textContent = n + ' / ' + max + (min ? ' characters · min ' + min : ' characters');
             out.classList.toggle('is-short', min > 0 && n > 0 && n < min);
             out.classList.toggle('is-ok', n >= min && n > 0 && n < max * 0.9);
@@ -235,5 +294,15 @@
         el.addEventListener('reset', update);
         el.form && el.form.addEventListener('reset', function () { setTimeout(update, 0); });
         update();
+    });
+})();
+
+/* ---------- Flavour ribbon: duplicate the items once so the scroll loops seamlessly ---------- */
+(function () {
+    'use strict';
+    document.querySelectorAll('.ribbon__track').forEach(function (t) {
+        if (t.getAttribute('data-looped')) return;
+        t.innerHTML += t.innerHTML;
+        t.setAttribute('data-looped', '1');
     });
 })();

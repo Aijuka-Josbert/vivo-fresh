@@ -112,11 +112,12 @@
     /* ---------- Homepage: vegetable / spice / meat category tiles ---------- */
     const vegCategoryGrid = document.getElementById('vegCategoryGrid');
     if (vegCategoryGrid) {
-        const veg = window.VIVO_VEGETABLES || [];
+        const veg = (window.VIVO_VEGETABLES || []).concat(window.VIVO_MEAT || []);
         const cats = VIVO.CATEGORIES.filter(function (c) { return veg.some(function (p) { return p.category === c; }); });
         vegCategoryGrid.innerHTML = cats.map(function (cat) {
             const n = veg.filter(function (p) { return p.category === cat; }).length;
-            return '<a class="cattile" href="vegetables.html?category=' + encodeURIComponent(cat) + '" data-tone="' + VIVO.toneFor(cat) + '">' +
+            const href = cat === 'Meat' ? 'meat.html' : 'vegetables.html?category=' + encodeURIComponent(cat);
+            return '<a class="cattile" href="' + href + '" data-tone="' + VIVO.toneFor(cat) + '">' +
                 tilePhoto(cat) + '<span class="cattile__glow" aria-hidden="true"></span>' +
                 '<span class="cattile__name">' + esc(cat) + '</span>' +
                 '<span class="cattile__count">' + n + ' ' + (n === 1 ? 'product' : 'products') + '</span>' +
@@ -154,13 +155,19 @@
     /* The host page declares its scope on <body data-scope="fruits|veg">.
        Fallback: infer from the presence of the category chips on the page. */
     const SCOPE = document.body.dataset.scope || 'all';
+    /* Old links (vegetables.html?category=Meat) now go to the dedicated meat page */
+    if (SCOPE === 'veg' && new URLSearchParams(window.location.search).get('category') === 'Meat') {
+        window.location.replace('meat.html');
+    }
 
     const SCOPE_POOL = (function () {
         const fruits = Array.isArray(window.VIVO_FRUITS) ? window.VIVO_FRUITS : [];
         const veg = Array.isArray(window.VIVO_VEGETABLES) ? window.VIVO_VEGETABLES : [];
         if (SCOPE === 'fruits') return fruits;
+        const meat = Array.isArray(window.VIVO_MEAT) ? window.VIVO_MEAT : [];
         if (SCOPE === 'veg') return veg;
-        return fruits.concat(veg);
+        if (SCOPE === 'meat') return meat;
+        return fruits.concat(veg, meat);
     })();
 
     const SCOPE_CATEGORIES = (function () {
@@ -168,6 +175,11 @@
         const present = new Set(SCOPE_POOL.map(function (p) { return p.category; }));
         return all.filter(function (c) { return present.has(c); });
     })();
+
+    if (SCOPE_CATEGORIES.length < 2) {
+        const ch = document.getElementById('categoryChips');
+        if (ch) ch.hidden = true;
+    }
 
     const searchInput = document.getElementById('productSearch');
     const clearBtn = document.getElementById('clearSearch');

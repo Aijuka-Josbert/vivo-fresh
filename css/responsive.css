@@ -1047,3 +1047,32 @@ a {
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
+
+
+/* ============================================================
+   ROUND 5 — hero photo slot, icons, link-safety feedback
+   ============================================================ */
+.hero__art--girl { display: flex; justify-content: center; align-items: center; }
+.herogirl { position: relative; width: min(100%, 520px); aspect-ratio: 5 / 6; isolation: isolate; }
+.herogirl__blob { position: absolute; z-index: -1; border-radius: 50%; }
+.herogirl__blob--gold { width: 78%; aspect-ratio: 1; left: 11%; top: 8%; background: radial-gradient(circle at 35% 30%, #ffd58a, #f1a34a 70%); box-shadow: 0 30px 60px rgba(241, 163, 74, 0.35); }
+.herogirl__blob--coral { width: 46%; aspect-ratio: 1; right: -4%; bottom: 6%; background: radial-gradient(circle at 30% 30%, #f28b78, #e76d58); }
+.herogirl__blob--green { width: 38%; aspect-ratio: 1; left: -2%; bottom: 14%; background: radial-gradient(circle at 30% 30%, #4e8f6b, #285943); }
+.herogirl__img { position: relative; width: 100%; height: 100%; object-fit: contain; display: block; filter: drop-shadow(0 18px 24px rgba(28, 64, 48, 0.25)); }
+.herogirl.is-placeholder .herogirl__blob { display: none; }
+.herogirl .hero__badge { z-index: 2; }
+@media (prefers-reduced-motion: no-preference) {
+  .herogirl__blob--coral { animation: floaty 7s ease-in-out infinite; }
+  .herogirl__blob--green { animation: floaty 9s ease-in-out infinite reverse; }
+}
+@keyframes floaty { 50% { transform: translateY(-12px); } }
+@media (max-width: 720px) { .herogirl { width: min(88%, 380px); margin-inline: auto; } }
+
+.title-icon { color: var(--coral); font-size: 0.85em; margin-left: 0.15em; }
+.foodcard__emoji { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 255, 255, 0.92); color: var(--green); font-size: 1.6rem; filter: none; box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22); }
+@media (max-width: 720px) { .foodcard__emoji { width: 56px; height: 56px; font-size: 1.8rem; } }
+.ribbon .bi { margin-right: 0.35rem; font-size: 1.05em; }
+.btn .bi { margin-right: 0.35rem; }
+
+.charcount.is-bad { color: #b3261e; font-weight: 600; }
+.field input.has-error, .field textarea.has-error { border-color: #b3261e; }

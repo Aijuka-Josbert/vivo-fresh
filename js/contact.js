@@ -20,7 +20,8 @@
     contactName: function (v) {
       if (!v.trim()) return 'Please enter your name.';
       if (v.trim().length < 2) return 'Please enter your full name.';
-      return '';
+      const bad = VIVO.safety.check(v);
+      return bad ? bad.message : '';
     },
     contactEmail: function (v) {
       if (!v.trim()) return 'Please enter your email address.';
@@ -29,12 +30,14 @@
     },
     contactSubject: function (v) {
       if (!v.trim()) return 'Please add a subject.';
-      return '';
+      const bad = VIVO.safety.check(v);
+      return bad ? bad.message : '';
     },
     contactMessage: function (v) {
       if (!v.trim()) return 'Please write a message.';
       if (v.trim().length < 10) return 'Please add a little more detail (10 characters minimum).';
-      return '';
+      const bad = VIVO.safety.check(v);
+      return bad ? bad.message : '';
     }
   };
 
@@ -112,11 +115,11 @@
     }
 
     const payload = {
-      name: form.elements.contactName.value.trim(),
+      name: VIVO.safety.clean(form.elements.contactName.value),
       email: form.elements.contactEmail.value.trim(),
-      subject: form.elements.contactSubject.value.trim(),
-      message: form.elements.contactMessage.value.trim(),
-      _subject: 'VIVO FRESH website enquiry — ' + form.elements.contactSubject.value.trim()
+      subject: VIVO.safety.clean(form.elements.contactSubject.value),
+      message: VIVO.safety.clean(form.elements.contactMessage.value),
+      _subject: 'VIVO FRESH website enquiry — ' + VIVO.safety.clean(form.elements.contactSubject.value)
     };
 
     if (CFG.provider === 'web3forms') {

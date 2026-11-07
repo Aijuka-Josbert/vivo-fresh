@@ -18,13 +18,16 @@
             validate: function (v) {
                 if (!v.trim()) return 'Please enter your full name.';
                 if (v.trim().length < 2) return 'That name looks too short.';
-                return '';
+                const bad = VIVO.safety.check(v);
+                return bad ? bad.message : '';
             }
         },
         phone: {
             el: document.getElementById('phone'),
             validate: function (v) {
                 const digits = v.replace(/[^\d]/g, '');
+                const bad = VIVO.safety.check(v, 'phone');
+                if (bad) return bad.message;
                 if (!digits) return 'Please enter your WhatsApp or contact number.';
                 if (digits.length < 9) return 'Please enter a valid phone number.';
                 if (digits.length > 15) return 'That number looks too long.';
@@ -36,7 +39,15 @@
             validate: function (v) {
                 if (!v.trim()) return 'Please tell us where to deliver.';
                 if (v.trim().length < 3) return 'Please give a more specific location.';
-                return '';
+                const bad = VIVO.safety.check(v);
+                return bad ? bad.message : '';
+            }
+        },
+        notes: {
+            el: document.getElementById('notes'),
+            validate: function (v) {
+                const bad = VIVO.safety.check(v);
+                return bad ? bad.message : '';
             }
         }
     };
@@ -72,10 +83,10 @@
 
     function collectCustomer() {
         return {
-            name: fields.fullName.el.value.trim(),
-            phone: fields.phone.el.value.trim(),
-            location: fields.location.el.value.trim(),
-            notes: (document.getElementById('notes') || {}).value || ''
+            name: VIVO.safety.clean(fields.fullName.el.value),
+            phone: VIVO.safety.clean(fields.phone.el.value),
+            location: VIVO.safety.clean(fields.location.el.value),
+            notes: VIVO.safety.clean((document.getElementById('notes') || {}).value || '')
         };
     }
 

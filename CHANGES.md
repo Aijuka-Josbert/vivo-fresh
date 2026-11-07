@@ -68,3 +68,14 @@ Owner decisions applied: second number (+256 755 554 669) removed, one WhatsApp 
 3. Confirm the domain vivofreshuganda.com is yours; if not, replace it in canonical/og/sitemap/robots/JSON-LD.
 4. After deploy test: shop -> product page -> add -> cart -> WhatsApp, on a phone (and 320/360/390/430px).
 5. Run PageSpeed Insights on the live URL and check the browser console for CSP warnings.
+
+
+## Round 5 — final polish
+- Meat is now independent: `js/data/meat.js` (5 products, moved unchanged from vegetables.js), own page `meat.html`, own nav/footer links, own counters. vegetables.html now = 83 vegetables & spices. Old links `vegetables.html?category=Meat` redirect to meat.html. Product pages/breadcrumbs know about the meat department. Sitemap updated.
+- vegetables.html title fixed: "Vegetables & Spices — 83 Products" (it said 90; the page is 88 only while meat was still inside it, so after splitting meat out the correct number is 83). Home/shop/products counts are derived from the data (131 = 43 + 83 + 5).
+- Bootstrap Icons implemented locally (3 KB subset, no CDN, CSP untouched). Emojis in food cards, ribbon, titles and call buttons replaced by icons. Bootstrap has no meat/pepper icon, so "fire" (grill) is used for meat and "lightning" for hot chillies.
+- Home hero: girl-with-produce photo slot with colourful gold/coral/green shapes + placeholder SVG that doubles as a design guide. (The old dragon-fruit arch collage was replaced.)
+- Ribbon loop: it now duplicates itself in JS so the scroll is seamless.
+- Link-blocking in ALL forms (`VIVO.safety`): URLs, www., bare domains/TLDs, obfuscated ("evil dot com", "evil(.)com", spaced h t t p), IPs, javascript:/data: schemes, `<` `>` markup, on*= handlers, full-width/zero-width tricks; phone = digits only. Live red warning under the field, blocks submit, and text is cleaned again before it goes into the WhatsApp/email message.
+- Hosting: netlify.toml (kept), hosting/cloudflare-pages/_headers, hosting/namecheap-cpanel/.htaccess, hosting/HOSTING.md with a recommendation.
+- Tests (jsdom): 22 attack-style strings blocked, 14 normal customer texts allowed, forms warn/block (contact form sends nothing when the message holds a link), meat.html 5 cards, vegetables 83 with no Meat chip, shop 131, beef detail page + 4 recommendations, icons present, hero slot present, counts 83 veg - 5 meats. All pass. Still no real-browser/phone test: please check the hero slot, ribbon and layouts on your phone.

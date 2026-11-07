@@ -66,7 +66,8 @@ vivo-fresh/
     ├── contact.js        Contact form (Formspree / Web3Forms)
     └── data/
         ├── fruits.js     <- 43 products
-        └── vegetables.js <- future vegetable catalogue
+        ├── vegetables.js <- vegetables, herbs & spices (83)
+        └── meat.js       <- meat (5), its own catalogue + page (meat.html)
 ```
 
 ---
@@ -349,3 +350,19 @@ These items are deliberately **not invented** on the site. Please confirm before
 1. Create the key at web3forms.com using the business email (`amongivivian123@gmail.com`).
 2. In `js/config.js`, set `email.provider: "web3forms"` and paste the key into `email.web3formsAccessKey`.
 3. Deploy, send a test message from `contact.html`, and confirm it arrives. Until then the form tells visitors it is not connected and points them to WhatsApp/email (it never pretends to send).
+
+
+---
+
+## Photos you can add (placeholders are already in the site)
+- **Home hero:** save a transparent-background picture as `assets/images/hero-girl.webp` (about 1000x1200, under 200 KB). Until then `hero-girl-placeholder.svg` shows.
+- **About page:** `assets/images/about-photo.jpg` (landscape, about 1600x900).
+
+## Icons
+Bootstrap Icons are bundled locally as a 3 KB subset (`assets/fonts/bootstrap-icons-subset.woff2`, `css/icons.css`), so no external stylesheet and the security policy stays strict. To use a new icon, add it to the subset (see the comment at the top of `css/icons.css`).
+
+## Form safety (links are blocked)
+Every customer-typed field rejects links, web addresses, obfuscated links ("evil dot com"), `<`/`>` markup and event handlers, and the phone field accepts digits only (`VIVO.safety` in `js/main.js`). This stops attackers using your forms to push scam links to you. It runs in the browser, so also switch on spam protection at the form provider (Web3Forms: enable hCaptcha/reCAPTCHA and restrict the key to your domain).
+
+## Hosting
+See `hosting/HOSTING.md` (Netlify, Cloudflare Pages, Namecheap cPanel).

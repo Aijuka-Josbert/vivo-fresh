@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /cart.html
+Disallow: /hosting/
 
 Sitemap: https://vivofreshuganda.com/sitemap.xml
